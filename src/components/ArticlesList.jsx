@@ -7,17 +7,17 @@ function ArticlesList() {
   const [articleList, setArticleList] = useState([]);
 
   useEffect(() => {
-    setIsLoading(true);
-    getAllArticles()
-      .then(({ articles }) => {
+    const getArticles = async () => {
+      try {
+        setIsLoading(true);
+        const { articles } = await getAllArticles();
         setArticleList(articles);
-      })
-      .then(() => {
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error(`Error getting articles`, error);
-      });
+      } catch (error) {
+        console.error('error getting articles', error);
+      }
+    };
+    getArticles();
+    setIsLoading(false);
   }, []);
 
   if (isLoading) {

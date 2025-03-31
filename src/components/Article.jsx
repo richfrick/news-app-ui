@@ -20,17 +20,17 @@ function Article() {
 
   useEffect(() => {
     setIsLoading(true);
-
-    getArticleById(article_id)
-      .then(({ article }) => {
+    const getArticleUsingID = async () => {
+      try {
+        setIsLoading(true);
+        const { article } = await getArticleById(article_id);
         setArticleDetails(article);
-      })
-      .then(() => {
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error(`Error getting article`, error);
-      });
+      } catch (error) {
+        console.error('error getting article', error);
+      }
+    };
+    getArticleUsingID();
+    setIsLoading(false);
   }, []);
 
   if (isLoading) {
