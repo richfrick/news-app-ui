@@ -29,7 +29,7 @@ function Article() {
         setIsLoading(false);
       })
       .catch((error) => {
-        console.log(`Error getting article`, error);
+        console.error(`Error getting article`, error);
       });
   }, []);
 

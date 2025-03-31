@@ -16,7 +16,7 @@ function ArticlesList() {
         setIsLoading(false);
       })
       .catch((error) => {
-        console.log(`Error getting articles`, error);
+        console.error(`Error getting articles`, error);
       });
   }, []);
 
@@ -24,12 +24,10 @@ function ArticlesList() {
     return <h1>Loading Articles....</h1>;
   }
   return (
-    <section>
-      <div className="flex flex-wrap">
-        {articleList.map((article) => {
-          return <ArticleCard article={article} key={article.article_id} />;
-        })}
-      </div>
+    <section className="flex flex-wrap gap-3 justify-center">
+      {articleList.map((article) => {
+        return <ArticleCard article={article} key={article.article_id} />;
+      })}
     </section>
   );
 }

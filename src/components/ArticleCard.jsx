@@ -8,7 +8,7 @@ const ArticleCard = ({ article }) => {
     <Link
       to="/article/"
       state={article}
-      className="basis-64 border rounded-lg border-[#243c5a] shadow-md overflow-hidden"
+      className="p-3 basis-64 border rounded-lg border-[#243c5a]"
     >
       <div>
         <h2>{title}</h2>

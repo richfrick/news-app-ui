@@ -3,7 +3,7 @@ import ArticlesList from './ArticlesList';
 function ArticlesContainer() {
   return (
     <section>
-      <h2>Articles</h2>
+      <h1 className="m-5">Articles</h1>
       <ArticlesList />
     </section>
   );
