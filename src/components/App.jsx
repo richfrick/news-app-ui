@@ -3,6 +3,7 @@ import '../styling/App.css';
 import ArticleContainer from './ArticlesContainer.jsx';
 import Header from './Header.jsx';
 import ArticlesList from './ArticlesList.jsx';
+import Article from './article.jsx';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<ArticleContainer />} />
+        <Route path="/article/" element={<Article />} />
       </Routes>
     </>
   );

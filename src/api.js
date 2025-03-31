@@ -10,3 +10,9 @@ export const getAllArticles = () => {
     return data;
   });
 };
+
+export const getArticleById = (article_id) => {
+  return newsAppAPI.get(`articles/${article_id}`).then(({ data }) => {
+    return data;
+  });
+};
