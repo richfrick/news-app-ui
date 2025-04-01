@@ -2,6 +2,7 @@ import { useLocation } from 'react-router-dom';
 import { getArticleById } from '../api';
 import { useEffect, useState } from 'react';
 import { formatDate } from '../utils/utils';
+import CommentContainer from './CommentContainer';
 
 function Article() {
   const location = useLocation();
@@ -51,6 +52,7 @@ function Article() {
       <p>{body}</p>
       <h2>Up-votes: {votes}</h2>
       <h2>Comments: {comment_count}</h2>
+      <CommentContainer />
     </div>
   );
 }
