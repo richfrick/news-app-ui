@@ -1,13 +1,26 @@
+import { Link } from 'react-router-dom';
+import { formatDate } from '../utils/utils';
+
 const ArticleCard = ({ article }) => {
+  const { article_id, title, topic, author, votes, comment_count, created_at } =
+    article;
+
   return (
-    <div className="basis-64 border rounded-lg border-[#243c5a] shadow-md overflow-hidden">
-      <h2>{article.title}</h2>
-      <h3>{article.topic}</h3>
-      <h3>{article.author}</h3>
-      <h3>{article.votes}</h3>
-      <h3>{article.comment_count}</h3>
-      <h3>{article.created_at}</h3>
-    </div>
+    <Link
+      to={`/articles/${article_id}`}
+      state={article}
+      className="p-3 basis-64 border rounded-lg border-[#243c5a]"
+    >
+      <div>
+        <h2 className="border-b-1">{title}</h2>
+        <h3>
+          Created by {author} on {formatDate(created_at)}
+        </h3>
+        <h3>Up-votes: {votes}</h3>
+        <h3>Comments: {comment_count}</h3>
+        <h3>Topic: {topic}</h3>
+      </div>
+    </Link>
   );
 };
 

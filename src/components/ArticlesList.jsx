@@ -7,31 +7,27 @@ function ArticlesList() {
   const [articleList, setArticleList] = useState([]);
 
   useEffect(() => {
-    setIsLoading(true);
-    getAllArticles()
-      .then(({ articles }) => {
+    const getArticles = async () => {
+      setIsLoading(true);
+      try {
+        const { articles } = await getAllArticles();
         setArticleList(articles);
-      })
-      .then(() => {
         setIsLoading(false);
-      })
-      .catch((error) => {
-        console.log(`Error getting articles`, error);
-      });
+      } catch (error) {
+        console.error('error getting articles', error);
+      }
+    };
+    getArticles();
   }, []);
-
-  console.log(articleList);
 
   if (isLoading) {
     return <h1>Loading Articles....</h1>;
   }
   return (
-    <section>
-      <div className="flex flex-wrap">
-        {articleList.map((article) => {
-          return <ArticleCard article={article} key={article.article_id} />;
-        })}
-      </div>
+    <section className="flex flex-wrap gap-3 justify-center">
+      {articleList.map((article) => {
+        return <ArticleCard article={article} key={article.article_id} />;
+      })}
     </section>
   );
 }
