@@ -4,7 +4,6 @@ const useApiRequest = (apiRequest, ...args) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
-
   useEffect(() => {
     const makeApiRequest = async () => {
       setError(null);
@@ -19,7 +18,7 @@ const useApiRequest = (apiRequest, ...args) => {
       }
     };
     makeApiRequest();
-  }, []);
+  }, [...args]);
 
   return { data, isLoading, error };
 };

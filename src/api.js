@@ -30,3 +30,17 @@ export const getCommentsByArticleId = async (article_id) => {
     console.log('error retrieving comments', error);
   }
 };
+
+export const patchUpOrDownVote = async (article_id, upOrDownVoteNum) => {
+  try {
+    const requestObject = { addOrRemoveVotes: upOrDownVoteNum };
+    const { data } = await newsAppAPI.patch(
+      `/articles/${article_id}`,
+      requestObject
+    );
+    return data;
+  } catch (error) {
+    console.log('error while updating votes', error);
+    throw error;
+  }
+};
