@@ -1,31 +1,19 @@
-import { useEffect, useState } from 'react';
 import { getAllArticles } from '../api';
 import ArticleCard from './ArticleCard';
+import useApiRequest from '../hooks/useApiRequest';
 
 function ArticlesList() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [articleList, setArticleList] = useState([]);
-
-  useEffect(() => {
-    const getArticles = async () => {
-      setIsLoading(true);
-      try {
-        const { articles } = await getAllArticles();
-        setArticleList(articles);
-        setIsLoading(false);
-      } catch (error) {
-        console.error('error getting articles', error);
-      }
-    };
-    getArticles();
-  }, []);
+  const { data, isLoading, error } = useApiRequest(getAllArticles);
 
   if (isLoading) {
     return <h1>Loading Articles....</h1>;
   }
+  if (error) {
+    return <Error error={error} />;
+  }
   return (
     <section className="flex flex-wrap gap-3 justify-center">
-      {articleList.map((article) => {
+      {data.map((article) => {
         return <ArticleCard article={article} key={article.article_id} />;
       })}
     </section>
