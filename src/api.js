@@ -7,7 +7,7 @@ const newsAppAPI = axios.create({
 export const getAllArticles = async () => {
   try {
     const { data } = await newsAppAPI.get('/articles');
-    return data;
+    return data.articles;
   } catch (error) {
     console.error('error getting articles', error);
   }
@@ -16,7 +16,7 @@ export const getAllArticles = async () => {
 export const getArticleById = async (article_id) => {
   try {
     const { data } = await newsAppAPI.get(`articles/${article_id}`);
-    return data;
+    return data.article;
   } catch (error) {
     console.log('error retreving article', error);
   }

@@ -23,7 +23,7 @@ function Article() {
     const getArticleUsingID = async () => {
       setIsLoading(true);
       try {
-        const { article } = await getArticleById(article_id);
+        const article = await getArticleById(article_id);
         setArticleDetails(article);
         setIsLoading(false);
       } catch (error) {
