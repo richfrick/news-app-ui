@@ -8,16 +8,16 @@ function ArticlesList() {
 
   useEffect(() => {
     const getArticles = async () => {
+      setIsLoading(true);
       try {
-        setIsLoading(true);
         const { articles } = await getAllArticles();
         setArticleList(articles);
+        setIsLoading(false);
       } catch (error) {
         console.error('error getting articles', error);
       }
     };
     getArticles();
-    setIsLoading(false);
   }, []);
 
   if (isLoading) {

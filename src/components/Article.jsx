@@ -21,16 +21,16 @@ function Article() {
   useEffect(() => {
     setIsLoading(true);
     const getArticleUsingID = async () => {
+      setIsLoading(true);
       try {
-        setIsLoading(true);
         const { article } = await getArticleById(article_id);
         setArticleDetails(article);
+        setIsLoading(false);
       } catch (error) {
         console.error('error getting article', error);
       }
     };
     getArticleUsingID();
-    setIsLoading(false);
   }, []);
 
   if (isLoading) {
