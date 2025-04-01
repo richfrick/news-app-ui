@@ -7,7 +7,7 @@ const ArticleCard = ({ article }) => {
 
   return (
     <Link
-      to={`/article/${article_id}`}
+      to={`/articles/${article_id}`}
       state={article}
       className="p-3 basis-64 border rounded-lg border-[#243c5a]"
     >
