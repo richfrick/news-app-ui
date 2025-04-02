@@ -1,12 +1,11 @@
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { getCommentsByArticleId } from '../api';
 import useApiRequest from '../hooks/useApiRequest';
 import CommentCard from './CommentCard';
 import { useState } from 'react';
 
 function CommentList({ fetchCommentsTrigger }) {
-  const location = useLocation();
-  const { article_id } = location.state;
+  const { article_id } = useParams();
   const [commentDeleted, setCommentDeleted] = useState(0);
   const [statusMessage, setStatusMessage] = useState('');
   const { data, isLoading, error } = useApiRequest(

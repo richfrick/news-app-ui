@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { patchUpOrDownVote } from '../api';
 
-function VotingContainer() {
-  const location = useLocation();
-  const { votes, article_id } = location.state;
+function VotingContainer({ votes }) {
+  const { article_id } = useParams();
   const [error, setError] = useState(null);
   const [voteCount, setVoteCount] = useState(0);
 
