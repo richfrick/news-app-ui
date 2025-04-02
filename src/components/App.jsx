@@ -3,15 +3,18 @@ import '../styling/App.css';
 import ArticleContainer from './ArticlesContainer.jsx';
 import Header from './Header.jsx';
 import Article from './Article.jsx';
+import { UserProvider } from '../contexts/User.jsx';
 
 function App() {
   return (
     <>
-      <Header />
-      <Routes>
-        <Route path="/" element={<ArticleContainer />} />
-        <Route path="/articles/:article_id" element={<Article />} />
-      </Routes>
+      <UserProvider>
+        <Header />
+        <Routes>
+          <Route path="/" element={<ArticleContainer />} />
+          <Route path="/articles/:article_id" element={<Article />} />
+        </Routes>
+      </UserProvider>
     </>
   );
 }

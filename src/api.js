@@ -6,8 +6,10 @@ const newsAppAPI = axios.create({
 
 export const getAllArticles = async () => {
   try {
-    const { data } = await newsAppAPI.get('/articles');
-    return data.articles;
+    const {
+      data: { articles },
+    } = await newsAppAPI.get('/articles');
+    return articles;
   } catch (error) {
     console.error('error getting articles', error);
   }
@@ -15,8 +17,10 @@ export const getAllArticles = async () => {
 
 export const getArticleById = async (article_id) => {
   try {
-    const { data } = await newsAppAPI.get(`/articles/${article_id}`);
-    return data.article;
+    const {
+      data: { article },
+    } = await newsAppAPI.get(`/articles/${article_id}`);
+    return article;
   } catch (error) {
     console.log('error retreving article', error);
   }
@@ -24,8 +28,10 @@ export const getArticleById = async (article_id) => {
 
 export const getCommentsByArticleId = async (article_id) => {
   try {
-    const { data } = await newsAppAPI.get(`/articles/${article_id}/comments`);
-    return data.comments;
+    const {
+      data: { comments },
+    } = await newsAppAPI.get(`/articles/${article_id}/comments`);
+    return comments;
   } catch (error) {
     console.log('error retrieving comments', error);
   }
@@ -41,6 +47,23 @@ export const patchUpOrDownVote = async (article_id, upOrDownVoteNum) => {
     return data;
   } catch (error) {
     console.log('error while updating votes', error);
+    throw error;
+  }
+};
+
+export const postNewComment = async (article_id, author, body) => {
+  try {
+    const requestObject = {
+      author: author,
+      body: body,
+    };
+    const { data } = await newsAppAPI.post(
+      `/articles/${article_id}/comments`,
+      requestObject
+    );
+    return data;
+  } catch (error) {
+    console.log('error while creating comment', error);
     throw error;
   }
 };
