@@ -50,3 +50,20 @@ export const patchUpOrDownVote = async (article_id, upOrDownVoteNum) => {
     throw error;
   }
 };
+
+export const postNewComment = async (article_id, author, body) => {
+  try {
+    const requestObject = {
+      author: author,
+      body: body,
+    };
+    const { data } = await newsAppAPI.post(
+      `/articles/${article_id}/comments`,
+      requestObject
+    );
+    return data;
+  } catch (error) {
+    console.log('error while creating comment', error);
+    throw error;
+  }
+};

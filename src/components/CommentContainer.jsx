@@ -1,13 +1,14 @@
+import { useState } from 'react';
 import CommentAdder from './CommentAdder';
 import CommentList from './CommentList';
 
 function CommentContainer() {
+  const [fetchCommentsTrigger, setFetchCommentsTrigger] = useState(0);
   return (
     <section>
       <h1 className="m-5">------------</h1>
-      <h2>comments</h2>
-      <CommentAdder />
-      <CommentList />
+      <CommentAdder setFetchCommentsTrigger={setFetchCommentsTrigger} />
+      <CommentList fetchCommentsTrigger={fetchCommentsTrigger} />
     </section>
   );
 }

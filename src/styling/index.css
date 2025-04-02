@@ -13,11 +13,31 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  .invalid {
+    background-color: red;
+    color: rgba(255, 255, 255, 0.87);
+  }
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+}
+input,
+label {
+  display: block;
+}
+
+input {
+  border-radius: 8px;
+  padding: 0.5em 1em;
+  font-size: 1em;
+  font-weight: 500;
+  color: #1a1a1a;
+  background-color: rgba(255, 255, 255, 0.87);
+  margin: 5px;
+  width: 100%;
 }
 
 button {

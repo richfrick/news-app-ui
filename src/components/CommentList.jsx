@@ -3,12 +3,13 @@ import { getCommentsByArticleId } from '../api';
 import useApiRequest from '../hooks/useApiRequest';
 import CommentCard from './CommentCard';
 
-function CommentList() {
+function CommentList({ fetchCommentsTrigger }) {
   const location = useLocation();
   const { article_id } = location.state;
   const { data, isLoading, error } = useApiRequest(
     getCommentsByArticleId,
-    article_id
+    article_id,
+    fetchCommentsTrigger
   );
   if (isLoading) {
     return <h1>Loading comments....</h1>;
