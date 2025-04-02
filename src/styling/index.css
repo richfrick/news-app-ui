@@ -51,6 +51,13 @@ button {
   margin: 5px;
 }
 
+.btn-delete {
+  background-color: red;
+  color: white;
+  border-radius: 8px;
+  padding: 0.1em 0.5em;
+}
+
 button:hover {
   background-color: orange;
   border: 5px;
