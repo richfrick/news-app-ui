@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getArticleById } from '../api';
 import { useEffect, useState } from 'react';
 import { formatDate } from '../utils/utils';
@@ -48,9 +48,10 @@ function Article() {
   return (
     <div>
       <h1>{title}</h1>
-      <h2>
+      <h2 className="text-right">
         Posted by: {author} on {formatDate(created_at)}
       </h2>
+
       <img
         className="rounded-md w-full h-40"
         src={article_img_url}
