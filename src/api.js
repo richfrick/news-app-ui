@@ -67,3 +67,13 @@ export const postNewComment = async (article_id, author, body) => {
     throw error;
   }
 };
+
+export const deleteComment = async (comment_id) => {
+  try {
+    const { data } = await newsAppAPI.delete(`/comments/${comment_id}`);
+    return data;
+  } catch (error) {
+    console.log('error while deleting comment', error);
+    throw error;
+  }
+};
