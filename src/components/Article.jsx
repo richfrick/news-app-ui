@@ -3,23 +3,19 @@ import { getArticleById } from '../api';
 import { useEffect, useState } from 'react';
 import { formatDate } from '../utils/utils';
 import CommentContainer from './CommentContainer';
+import VotingContainer from './VotingContainer';
 
 function Article() {
   const location = useLocation();
   const { article_id } = location.state;
+  const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [articleDetails, setArticleDetails] = useState({});
-  const {
-    title,
-    author,
-    created_at,
-    article_img_url,
-    body,
-    votes,
-    comment_count,
-  } = articleDetails;
+  const { title, author, created_at, article_img_url, body, comment_count } =
+    articleDetails;
 
   useEffect(() => {
+    setError(null);
     setIsLoading(true);
     const getArticleUsingID = async () => {
       setIsLoading(true);
@@ -28,7 +24,8 @@ function Article() {
         setArticleDetails(article);
         setIsLoading(false);
       } catch (error) {
-        console.error('error getting article', error);
+        console.log('error getting article', error);
+        setError(error);
       }
     };
     getArticleUsingID();
@@ -36,6 +33,10 @@ function Article() {
 
   if (isLoading) {
     return <h1>Loading Article.......</h1>;
+  }
+
+  if (error) {
+    return <Error error={error} />;
   }
 
   return (
@@ -50,8 +51,8 @@ function Article() {
         alt="article image"
       />
       <p>{body}</p>
-      <h2>Up-votes: {votes}</h2>
       <h2>Comments: {comment_count}</h2>
+      <VotingContainer />
       <CommentContainer />
     </div>
   );
