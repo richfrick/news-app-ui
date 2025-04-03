@@ -4,12 +4,12 @@ const newsAppAPI = axios.create({
   baseURL: 'https://news-app-ugpw.onrender.com/api',
 });
 
-export const getAllArticles = async (topicQueryParam) => {
+export const getAllArticles = async (topic, sortBy, order) => {
   try {
     const {
       data: { articles },
     } = await newsAppAPI.get('/articles', {
-      params: { topic: topicQueryParam },
+      params: { topic: topic, sort_by: sortBy, order: order },
     });
     return articles;
   } catch (error) {
