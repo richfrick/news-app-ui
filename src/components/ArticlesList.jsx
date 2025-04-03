@@ -1,9 +1,19 @@
+import { useSearchParams } from 'react-router-dom';
 import { getAllArticles } from '../api';
 import ArticleCard from './ArticleCard';
 import useApiRequest from '../hooks/useApiRequest';
 
 function ArticlesList() {
-  const { data, isLoading, error } = useApiRequest(getAllArticles);
+  const [searchParams] = useSearchParams();
+  const sortBy = searchParams.get('sort_by') || '';
+  console.log(sortBy);
+  const sortOrder = searchParams.get('order') || '';
+  const { data, isLoading, error } = useApiRequest(
+    getAllArticles,
+    '',
+    sortBy,
+    sortOrder
+  );
 
   if (isLoading) {
     return <h1>Loading Articles....</h1>;
