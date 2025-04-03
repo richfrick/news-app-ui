@@ -3,7 +3,7 @@ import ArticlesList from './ArticlesList';
 
 function ArticlesContainer() {
   const [searchParams] = useSearchParams();
-  const sortBy = searchParams.get('sort_by') || 'relevance';
+  const sortBy = searchParams.get('sort_by') || '';
   const sortOrder = searchParams.get('order') || '';
   return (
     <section>

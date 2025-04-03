@@ -2,6 +2,7 @@ import { useSearchParams } from 'react-router-dom';
 import { getAllArticles } from '../api';
 import ArticleCard from './ArticleCard';
 import useApiRequest from '../hooks/useApiRequest';
+import ErrorComponent from './ErrorCompnent';
 
 function ArticleByTopic() {
   const [searchParams] = useSearchParams();
@@ -19,7 +20,7 @@ function ArticleByTopic() {
     return <h1>Loading Articles....</h1>;
   }
   if (error) {
-    return <Error error={error} />;
+    return <ErrorComponent error={error} />;
   }
   return (
     <>

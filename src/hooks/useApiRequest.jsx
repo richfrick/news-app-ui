@@ -5,16 +5,16 @@ const useApiRequest = (apiRequest, ...args) => {
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
   useEffect(() => {
+    setError(null);
+    setIsLoading(true);
     const makeApiRequest = async () => {
-      setError(null);
-      setIsLoading(true);
       try {
         const data = await apiRequest(...args);
         setData(data);
         setIsLoading(false);
-      } catch (error) {
-        console.log('error making request', error);
-        setError(error);
+      } catch (err) {
+        setIsLoading(false);
+        setError(err);
       }
     };
     makeApiRequest();

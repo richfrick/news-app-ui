@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { formatDate } from '../utils/utils';
 import CommentContainer from './CommentContainer';
 import VotingContainer from './VotingContainer';
+import ErrorComponent from './ErrorCompnent';
 
 function Article() {
   const { article_id } = useParams();
@@ -29,9 +30,9 @@ function Article() {
         const article = await getArticleById(article_id);
         setArticleDetails(article);
         setIsLoading(false);
-      } catch (error) {
-        console.log('error getting article', error);
-        setError(error);
+      } catch (err) {
+        setIsLoading(false);
+        setError(err);
       }
     };
     getArticleUsingID();
@@ -42,7 +43,7 @@ function Article() {
   }
 
   if (error) {
-    return <Error error={error} />;
+    return <ErrorComponent error={error} />;
   }
 
   return (
