@@ -27,7 +27,7 @@ function CommentAdder({ setFetchCommentsTrigger }) {
         setError(null);
         searchBox.current.classList.remove('invalid');
       } catch (err) {
-        console.log(err);
+        console.error(err);
         setSuccess('');
         setError('Your comment coult not be processed. Please try again later');
       }

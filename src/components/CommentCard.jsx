@@ -16,8 +16,7 @@ function CommentCard({ setStatusMessage, setCommentDeleted, comments }) {
       setStatusMessage('Your comment has been deleted');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err) {
-      console.log(err);
-      console.log(err);
+      console.error(err);
       setError('Unabe to delete comment, please try again later');
     }
   };

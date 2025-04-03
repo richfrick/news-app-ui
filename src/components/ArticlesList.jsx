@@ -6,7 +6,7 @@ import useApiRequest from '../hooks/useApiRequest';
 function ArticlesList() {
   const [searchParams] = useSearchParams();
   const sortBy = searchParams.get('sort_by') || '';
-  console.log(sortBy);
+
   const sortOrder = searchParams.get('order') || '';
   const { data, isLoading, error } = useApiRequest(
     getAllArticles,

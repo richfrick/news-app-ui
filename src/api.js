@@ -13,7 +13,7 @@ export const getAllArticles = async (topic, sortBy, order) => {
     });
     return articles;
   } catch (error) {
-    console.log('error getting articles', error);
+    console.error('error getting articles', error);
     throw error;
   }
 };
