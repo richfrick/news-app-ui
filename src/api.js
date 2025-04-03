@@ -13,7 +13,8 @@ export const getAllArticles = async (topic, sortBy, order) => {
     });
     return articles;
   } catch (error) {
-    console.error('error getting articles', error);
+    console.log('error getting articles', error);
+    throw error;
   }
 };
 
@@ -24,7 +25,8 @@ export const getArticleById = async (article_id) => {
     } = await newsAppAPI.get(`/articles/${article_id}`);
     return article;
   } catch (error) {
-    console.log('error retreving article', error);
+    console.error('error retreving article', error);
+    throw error;
   }
 };
 
@@ -35,7 +37,7 @@ export const getCommentsByArticleId = async (article_id) => {
     } = await newsAppAPI.get(`/articles/${article_id}/comments`);
     return comments;
   } catch (error) {
-    console.log('error retrieving comments', error);
+    console.error('error retrieving comments', error);
   }
 };
 
@@ -48,7 +50,7 @@ export const patchUpOrDownVote = async (article_id, upOrDownVoteNum) => {
     );
     return data;
   } catch (error) {
-    console.log('error while updating votes', error);
+    console.error('error while updating votes', error);
     throw error;
   }
 };
@@ -65,7 +67,7 @@ export const postNewComment = async (article_id, author, body) => {
     );
     return data;
   } catch (error) {
-    console.log('error while creating comment', error);
+    console.error('error while creating comment', error);
     throw error;
   }
 };
@@ -75,7 +77,7 @@ export const deleteComment = async (comment_id) => {
     const { data } = await newsAppAPI.delete(`/comments/${comment_id}`);
     return data;
   } catch (error) {
-    console.log('error while deleting comment', error);
+    console.error('error while deleting comment', error);
     throw error;
   }
 };

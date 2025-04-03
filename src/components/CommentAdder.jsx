@@ -45,6 +45,7 @@ function CommentAdder({ setFetchCommentsTrigger }) {
         {error ? <p className="text-red-500">{error}</p> : null}
         {success ? <p className="text-green-500">{success}</p> : null}
         <input
+          name="commentField"
           ref={searchBox}
           type="text"
           value={comment}
