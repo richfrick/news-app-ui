@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getArticleById } from '../api';
 import { useEffect, useState } from 'react';
 import { formatDate } from '../utils/utils';
@@ -6,13 +6,19 @@ import CommentContainer from './CommentContainer';
 import VotingContainer from './VotingContainer';
 
 function Article() {
-  const location = useLocation();
-  const { article_id } = location.state;
+  const { article_id } = useParams();
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [articleDetails, setArticleDetails] = useState({});
-  const { title, author, created_at, article_img_url, body, comment_count } =
-    articleDetails;
+  const {
+    title,
+    author,
+    created_at,
+    article_img_url,
+    body,
+    comment_count,
+    votes,
+  } = articleDetails;
 
   useEffect(() => {
     setError(null);
@@ -42,9 +48,10 @@ function Article() {
   return (
     <div>
       <h1>{title}</h1>
-      <h2>
+      <h2 className="text-right">
         Posted by: {author} on {formatDate(created_at)}
       </h2>
+
       <img
         className="rounded-md w-full h-40"
         src={article_img_url}
@@ -52,7 +59,7 @@ function Article() {
       />
       <p>{body}</p>
       <h2>Comments: {comment_count}</h2>
-      <VotingContainer />
+      <VotingContainer votes={votes} />
       <CommentContainer />
     </div>
   );

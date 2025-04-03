@@ -1,11 +1,10 @@
 import { useContext, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { UserContext } from '../contexts/User';
 import { postNewComment } from '../api';
 
 function CommentAdder({ setFetchCommentsTrigger }) {
-  const location = useLocation();
-  const { article_id } = location.state;
+  const { article_id } = useParams();
   const { currentUser } = useContext(UserContext);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
