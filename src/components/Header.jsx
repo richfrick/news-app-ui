@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { UserContext } from '../contexts/User';
-import logo from '../assets/file.svg';
+import logo from '../assets/snickerdoodle-logo.svg';
 
 function Header() {
   const { currentUser } = useContext(UserContext);

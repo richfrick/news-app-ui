@@ -3,6 +3,7 @@ import { getCommentsByArticleId } from '../api';
 import useApiRequest from '../hooks/useApiRequest';
 import CommentCard from './CommentCard';
 import { useState } from 'react';
+import Loading from './LoadingComponenet';
 
 function CommentList({ fetchCommentsTrigger }) {
   const { article_id } = useParams();
@@ -16,7 +17,7 @@ function CommentList({ fetchCommentsTrigger }) {
   );
 
   if (isLoading) {
-    return <h1>Loading comments....</h1>;
+    return <Loading />;
   }
   if (error) {
     return <Error error={error} />;

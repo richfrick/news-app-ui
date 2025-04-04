@@ -24,16 +24,23 @@ function CommentCard({ setStatusMessage, setCommentDeleted, comments }) {
   return (
     <div className="p-3 basis-64 border rounded-lg mt-3">
       {error ? <p className="text-red-500 text-lg">{error}</p> : null}
-      <div className="flex justify-between items-centre border-b-3">
-        {currentUser === author ? (
-          <button className="btn-delete" onClick={handleClick}>
-            X
-          </button>
-        ) : null}
-        <h2>
-          {author} at {formatDate(created_at)}
-        </h2>
+
+      <div className="flex justify-end border-b-3">
+        <div className="relative inline-block text-right">
+          <h2 className="pr-8">
+            {author} at {formatDate(created_at)}
+          </h2>
+          {currentUser === author && (
+            <button
+              className="absolute top-0 right-0 btn-delete"
+              onClick={handleClick}
+            >
+              X
+            </button>
+          )}
+        </div>
       </div>
+
       <p className="text-left">{body}</p>
     </div>
   );

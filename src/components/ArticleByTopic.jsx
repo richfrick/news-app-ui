@@ -3,6 +3,7 @@ import { getAllArticles } from '../api';
 import ArticleCard from './ArticleCard';
 import useApiRequest from '../hooks/useApiRequest';
 import ErrorComponent from './ErrorCompnent';
+import Loading from './LoadingComponenet';
 
 function ArticleByTopic() {
   const [searchParams] = useSearchParams();
@@ -17,7 +18,7 @@ function ArticleByTopic() {
   );
 
   if (isLoading) {
-    return <h1>Loading Articles....</h1>;
+    return <Loading />;
   }
   if (error) {
     return <ErrorComponent error={error} />;

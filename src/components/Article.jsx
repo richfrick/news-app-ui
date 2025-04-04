@@ -5,6 +5,7 @@ import { formatDate } from '../utils/utils';
 import CommentContainer from './CommentContainer';
 import VotingContainer from './VotingContainer';
 import ErrorComponent from './ErrorCompnent';
+import Loading from './LoadingComponenet';
 
 function Article() {
   const { article_id } = useParams();
@@ -39,7 +40,7 @@ function Article() {
   }, []);
 
   if (isLoading) {
-    return <h1>Loading Article.......</h1>;
+    return <Loading />;
   }
 
   if (error) {
@@ -54,7 +55,7 @@ function Article() {
       </h2>
 
       <img
-        className="rounded-md w-full h-40"
+        className="rounded-md w-full h-60"
         src={article_img_url}
         alt="article image"
       />
