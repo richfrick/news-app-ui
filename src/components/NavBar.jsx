@@ -21,7 +21,7 @@ function NavBar() {
   };
 
   return (
-    <section className="border-b-4 flex justify-center">
+    <section className="border-b-4 flex justify-center border-[#ffa500]">
       <Link to="/" className="pr-4">
         <button>Article list</button>
       </Link>

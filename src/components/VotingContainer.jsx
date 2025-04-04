@@ -25,7 +25,9 @@ function VotingContainer({ votes }) {
       <h2>Votes: {votes + voteCount}</h2>
       <p className="m-5">did you like this article</p>
       <div>
-        {error ? <p className="text-red-500">{error}</p> : null}
+        {error ? (
+          <p className="text-red-500 text-lg font-bold">{error}</p>
+        ) : null}
         <button onClick={() => handleUpVoteClick(1)}>Yes</button>
         <button onClick={() => handleUpVoteClick(-1)}>No</button>
       </div>

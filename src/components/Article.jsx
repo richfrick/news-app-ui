@@ -49,18 +49,22 @@ function Article() {
 
   return (
     <div>
-      <h1>{title}</h1>
-      <h2 className="text-right">
-        Posted by: {author} on {formatDate(created_at)}
-      </h2>
+      <div className="border-b-3 border-[#ffa500]">
+        <h1>{title}</h1>
+        <h2 className="text-right">
+          Posted by: {author} on {formatDate(created_at)}
+        </h2>
+      </div>
 
-      <img
-        className="rounded-md w-full h-60"
-        src={article_img_url}
-        alt="article image"
-      />
-      <p>{body}</p>
-      <h2>Comments: {comment_count}</h2>
+      <div className="flex items-center justify-center pt-3">
+        <img
+          className="flex items-center justify-center"
+          src={article_img_url}
+          alt="article image"
+        />
+      </div>
+      <p className="pt-3">{body}</p>
+      <h2 className="pt-3">Comments: {comment_count}</h2>
       <VotingContainer votes={votes} />
       <CommentContainer />
     </div>

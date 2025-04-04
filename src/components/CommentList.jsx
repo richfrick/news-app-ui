@@ -26,7 +26,7 @@ function CommentList({ fetchCommentsTrigger }) {
   return (
     <div>
       {statusMessage ? (
-        <p className="text-green-500 text-lg">{statusMessage}</p>
+        <p className="text-green-500 text-lg font-bold">{statusMessage}</p>
       ) : null}
       {data.map((data) => {
         return (

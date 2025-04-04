@@ -14,7 +14,6 @@ function CommentCard({ setStatusMessage, setCommentDeleted, comments }) {
       setCommentDeleted((currentValue) => currentValue + 1);
       setError(null);
       setStatusMessage('Your comment has been deleted');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err) {
       console.error(err);
       setError('Unabe to delete comment, please try again later');
@@ -22,25 +21,19 @@ function CommentCard({ setStatusMessage, setCommentDeleted, comments }) {
   };
 
   return (
-    <div className="p-3 basis-64 border rounded-lg mt-3">
-      {error ? <p className="text-red-500 text-lg">{error}</p> : null}
+    <div className="p-3 basis-64 border rounded-lg border-[#ffa500] mb-4">
+      {error ? <p className="text-red-500 text-lg font-bold">{error}</p> : null}
 
-      <div className="flex justify-end border-b-3">
-        <div className="relative inline-block text-right">
-          <h2 className="pr-8">
-            {author} at {formatDate(created_at)}
-          </h2>
-          {currentUser === author && (
-            <button
-              className="absolute top-0 right-0 btn-delete"
-              onClick={handleClick}
-            >
-              X
-            </button>
-          )}
-        </div>
+      <div className="flex justify-end border-b-1 border-[#ffa500]">
+        <h2 className="pr-3">
+          {author} at {formatDate(created_at)}
+        </h2>
+        {currentUser === author && (
+          <button className=" btn-delete" onClick={handleClick}>
+            X
+          </button>
+        )}
       </div>
-
       <p className="text-left">{body}</p>
     </div>
   );

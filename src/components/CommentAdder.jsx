@@ -42,8 +42,12 @@ function CommentAdder({ setFetchCommentsTrigger }) {
     <form onSubmit={handleSubmit}>
       <label>
         Tell us what you think
-        {error ? <p className="text-red-500">{error}</p> : null}
-        {success ? <p className="text-green-500">{success}</p> : null}
+        {error ? (
+          <p className="text-red-500 text-lg font-bold">{error}</p>
+        ) : null}
+        {success ? (
+          <p className="text-green-500 text-lg font-bold">{success}</p>
+        ) : null}
         <input
           name="commentField"
           ref={searchBox}
