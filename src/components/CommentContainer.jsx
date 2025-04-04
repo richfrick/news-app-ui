@@ -6,7 +6,7 @@ function CommentContainer() {
   const [fetchCommentsTrigger, setFetchCommentsTrigger] = useState(0);
   return (
     <section>
-      <h1 className="m-5">------------</h1>
+      <h1 className="text-[#ffa500]">------------</h1>
       <CommentAdder setFetchCommentsTrigger={setFetchCommentsTrigger} />
       <CommentList fetchCommentsTrigger={fetchCommentsTrigger} />
     </section>

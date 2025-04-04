@@ -9,10 +9,10 @@ const ArticleCard = ({ article }) => {
     <Link
       to={`/articles/${article_id}`}
       state={article}
-      className="p-3 basis-64 border rounded-lg border-[#243c5a]"
+      className="p-3 basis-64 border rounded-lg border-[#ffa500]"
     >
       <div>
-        <h2 className="border-b-1">{title}</h2>
+        <h2 className="border-b-1 border-[#ffa500] font-bold pb-1">{title}</h2>
         <h3>
           Created by {author} on {formatDate(created_at)}
         </h3>

@@ -27,7 +27,7 @@ function CommentAdder({ setFetchCommentsTrigger }) {
         setError(null);
         searchBox.current.classList.remove('invalid');
       } catch (err) {
-        console.log(err);
+        console.error(err);
         setSuccess('');
         setError('Your comment coult not be processed. Please try again later');
       }
@@ -42,8 +42,12 @@ function CommentAdder({ setFetchCommentsTrigger }) {
     <form onSubmit={handleSubmit}>
       <label>
         Tell us what you think
-        {error ? <p className="text-red-500">{error}</p> : null}
-        {success ? <p className="text-green-500">{success}</p> : null}
+        {error ? (
+          <p className="text-red-500 text-lg font-bold">{error}</p>
+        ) : null}
+        {success ? (
+          <p className="text-green-500 text-lg font-bold">{success}</p>
+        ) : null}
         <input
           name="commentField"
           ref={searchBox}
