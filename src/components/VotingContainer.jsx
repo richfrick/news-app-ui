@@ -21,7 +21,7 @@ function VotingContainer({ votes }) {
   };
 
   return (
-    <div className="">
+    <section className="">
       <h2>Votes: {votes + voteCount}</h2>
       <p className="m-5">did you like this article</p>
       <div>
@@ -31,7 +31,7 @@ function VotingContainer({ votes }) {
         <button onClick={() => handleUpVoteClick(1)}>Yes</button>
         <button onClick={() => handleUpVoteClick(-1)}>No</button>
       </div>
-    </div>
+    </section>
   );
 }
 

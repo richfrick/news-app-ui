@@ -39,7 +39,7 @@ function CommentAdder({ setFetchCommentsTrigger }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form aria-label="Add Comment" onSubmit={handleSubmit}>
       <label>
         Tell us what you think
         {error ? (
