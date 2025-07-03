@@ -11,11 +11,11 @@ Home to the most takled about articles on the web
 
 ## 🚀 About
 
-A small app where you can view a list of articles from the world of Football, Cooking and Coding. Find an article that interests you and view it to leave a comment or up/down vote it.
+A small web app where you can view a list of articles from the world of Football, Cooking and Coding. Find an article that interests you and view it to leave a comment or up/down vote it.
 
 ## 📝 Hosted version
 
-Currently the [backend service](https://github.com/richfrick/news-app) supporting this is hosted on a free version of render which tears down after 15 mins on inactivity, so hitting this for the first time could take up to 50s to respond as the service spins back up.
+Currently the [backend service](https://github.com/richfrick/news-app) this is hosted on a free version of render which tears down after 15 mins on inactivity, so hitting this for the first time could take up to 50s to respond as the service spins back up.
 
 https://elaborate-snickerdoodle-8745b3.netlify.app/
 
@@ -24,6 +24,7 @@ https://elaborate-snickerdoodle-8745b3.netlify.app/
 Min Versions
 
 - [node v20 or above](https://nodejs.org/api/https.html) (build on v23.3.0)
+- [vitest v3 or above](https://www.npmjs.com/package/vitest) (tests written using 3.2.4)
 
 ## 📚 Getting started
 
@@ -41,10 +42,14 @@ In order to use this you will need define environment variables for connecting t
 
    `npm install`
 
-4. Start the app by running
+4. Run tests the (written using vitest & react-testing-library)
+
+   `npm run test`
+
+5. Start the app by running
 
    `npm run dev`
 
-5. By default vite will run the app on `http://localhost:5173/` if it is free but the teminal will tell you the port it has been opened on.
+6. By default vite will run the app on `http://localhost:5173/` if it is free but the teminal will tell you the port it has been opened on.
 
 This portfolio project was created as part of a Digital Skills Bootcamp in Software Engineering provided by [Northcoders](https://northcoders.com/)
