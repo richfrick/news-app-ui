@@ -13,7 +13,7 @@ function Header() {
         <h2>(so long as it's football, coding or cooking)</h2>
       </div>
       <div className="text-sm pl-2">
-        <h2>Current User:</h2>
+        <p>Current User:</p>
         <p>{currentUser}</p>
       </div>
     </header>

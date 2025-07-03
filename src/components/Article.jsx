@@ -48,13 +48,15 @@ function Article() {
   }
 
   return (
-    <div>
-      <div className="border-b-3 border-[#ffa500]">
-        <h1>{title}</h1>
-        <h2 className="text-right">
-          Posted by: {author} on {formatDate(created_at)}
-        </h2>
-      </div>
+    <section>
+      <section id="article-heading">
+        <div className="border-b-3 border-[#ffa500]">
+          <h1 id="article-title">{title}</h1>
+          <p id="author-details" className="text-right">
+            Posted by: {author} on {formatDate(created_at)}
+          </p>
+        </div>
+      </section>
 
       <div className="flex items-center justify-center pt-3">
         <img
@@ -67,7 +69,7 @@ function Article() {
       <h2 className="pt-3">Comments: {comment_count}</h2>
       <VotingContainer votes={votes} />
       <CommentContainer />
-    </div>
+    </section>
   );
 }
 
