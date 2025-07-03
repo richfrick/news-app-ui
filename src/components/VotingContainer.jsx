@@ -21,7 +21,7 @@ function VotingContainer({ votes }) {
   };
 
   return (
-    <section className="">
+    <section aria-label="voting" className="">
       <h2>Votes: {votes + voteCount}</h2>
       <p className="m-5">did you like this article</p>
       <div>

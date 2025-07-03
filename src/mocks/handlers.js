@@ -1,6 +1,27 @@
 import { http, HttpResponse } from 'msw';
 
 export const handlers = [
+  http.get('https://news-app-ugpw.onrender.com/api/articles/321', () => {
+    return HttpResponse.json(
+      {
+        msg: 'Not Found: article_id 321',
+      },
+      { status: 404 }
+    );
+  }),
+
+  http.get(
+    'https://news-app-ugpw.onrender.com/api/articles/321/comments',
+    () => {
+      return HttpResponse.json(
+        {
+          msg: 'Not Found',
+        },
+        { status: 404 }
+      );
+    }
+  ),
+
   http.get('https://news-app-ugpw.onrender.com/api/articles/123', () => {
     return HttpResponse.json({
       article: {

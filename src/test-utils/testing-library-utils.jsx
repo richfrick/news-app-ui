@@ -1,13 +1,19 @@
 import { render } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import { UserProvider } from '../contexts/User';
+import { TestUserProvider } from '../contexts/User';
 
 export function renderWithProviders(
   ui,
-  { route = '/', path = '/', withRoutes = false, ...renderOptions } = {}
+  {
+    loggedInUser,
+    route = '/',
+    path = '/',
+    withRoutes = false,
+    ...renderOptions
+  } = {}
 ) {
   const Wrapper = ({ children }) => (
-    <UserProvider>
+    <TestUserProvider loggedInUser={loggedInUser}>
       {withRoutes ? (
         <MemoryRouter initialEntries={[route]}>
           <Routes>
@@ -17,7 +23,7 @@ export function renderWithProviders(
       ) : (
         <MemoryRouter initialEntries={[route]}>{children}</MemoryRouter>
       )}
-    </UserProvider>
+    </TestUserProvider>
   );
   return render(ui, { wrapper: Wrapper, ...renderOptions });
 }
