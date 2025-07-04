@@ -5,7 +5,7 @@ import { describe, expect } from 'vitest';
 const { findByText, findByAltText, findByRole } = screen;
 
 describe('Article', () => {
-  test('Article details are rendered correctly from the api call', async () => {
+  test('Article details are rendered correctly', async () => {
     render(<Article />, {
       route: '/articles/123',
       path: '/articles/:article_id',

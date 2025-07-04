@@ -11,7 +11,7 @@ const ArticleCard = ({ article }) => {
       state={article}
       className="p-3 basis-64 border rounded-lg border-[#ffa500]"
     >
-      <div>
+      <article role="listitem">
         <h2 className="border-b-1 border-[#ffa500] font-bold pb-1">{title}</h2>
         <h3>
           Created by {author} on {formatDate(created_at)}
@@ -19,7 +19,7 @@ const ArticleCard = ({ article }) => {
         <h3>Up-votes: {votes}</h3>
         <h3>Comments: {comment_count}</h3>
         <h3>Topic: {topic}</h3>
-      </div>
+      </article>
     </Link>
   );
 };
