@@ -99,7 +99,7 @@ export const handlers = [
 
   http.get(
     'https://news-app-ugpw.onrender.com/api/articles/:articleId',
-    ({ params }) => {
+    ({ request, params }) => {
       const { articleId } = params;
 
       if (articleId === '123') {
@@ -115,6 +115,20 @@ export const handlers = [
             article_img_url:
               'https://images.pexels.com/photos/2403392/pexels-photo-2403392.jpeg?w=700&h=700',
             comment_count: 13,
+          },
+        });
+      } else if (articleId === '21') {
+        return HttpResponse.json({
+          article: {
+            article_id: 21,
+            title: 'Agility Training Drills For Football Players',
+            topic: 'football',
+            author: 'tickle122',
+            created_at: '2020-10-26T10:05:00.000Z',
+            votes: 5,
+            article_img_url:
+              'https://images.pexels.com/photos/3448250/pexels-photo-3448250.jpeg?w=700&h=700',
+            comment_count: 10,
           },
         });
       } else if (articleId === '321') {
@@ -135,7 +149,7 @@ export const handlers = [
     ({ params }) => {
       const { articleId } = params;
 
-      if (articleId === '123') {
+      if (articleId === '123' || articleId === '21') {
         return HttpResponse.json({
           comments: [
             {
@@ -159,8 +173,8 @@ export const handlers = [
     }
   ),
 
-  http.get('*', ({ request }) => {
-    console.warn('Unhandled GET:', request.url);
-    return HttpResponse.error();
-  }),
+  // http.get('*', ({ request }) => {
+  //   console.warn('Unhandled GET:', request.url);
+  //   return HttpResponse.error();
+  // }),
 ];

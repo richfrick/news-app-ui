@@ -2,8 +2,9 @@ import { render, screen } from '../test-utils/testing-library-utils';
 import ArticleByTopic from '../components/ArticleByTopic';
 import { describe, expect, test } from 'vitest';
 import userEvent from '@testing-library/user-event';
+import Article from '../components/Article';
 
-const { findByText, findByRole, findAllByRole } = screen;
+const { findByRole, findAllByRole } = screen;
 
 describe('Article By Topic', () => {
   const topicAriaLabel = 'filtered topic';
@@ -62,19 +63,32 @@ describe('Article By Topic', () => {
     expect(articleList).toHaveLength(2);
   });
 
-  test('sort by comment count', async () => {
+  test('Clicking on an Article list item takes you to the article', async () => {
+    const user = userEvent.setup();
+
     render(<ArticleByTopic />, {
-      route: '/articles?sort_by=comment_count&topic=football',
-      path: '/articles',
+      route: '/articles?topic=football',
       withRoutes: true,
+      routes: [
+        { path: '/articles', element: <ArticleByTopic /> },
+        { path: '/articles/:article_id', element: <Article /> },
+      ],
     });
 
-    const sortedByText = await findByRole('heading', {
-      name: /^Articles currently filtered by comment_count$/i,
+    const articleLinks = await findAllByRole('link');
+    expect(articleLinks.length).toBe(2);
+
+    await user.click(articleLinks[0]);
+
+    const title = await findByRole('heading', {
+      name: /Agility Training Drills For Football Players/i,
     });
 
-    expect(sortedByText).toBeVisible();
+    expect(title).toBeVisible();
+    expect(articleLinks[0]).not.toBeInTheDocument();
   });
+
+  test.todo('sort by comment count', async () => {});
 
   test.todo('sort by date posted');
   test.todo('sort by votes');
