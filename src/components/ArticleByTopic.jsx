@@ -26,7 +26,7 @@ function ArticleByTopic() {
   return (
     <section aria-label="filtered topic">
       <h1>{topic}</h1>
-      {sortBy ? (
+      {sortBy || sortOrder ? (
         <h2 className="flex justify-center pb-2 text-[20px]">
           Articles currently filtered{' '}
           {sortBy ? (

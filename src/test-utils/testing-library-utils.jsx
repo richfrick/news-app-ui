@@ -35,8 +35,6 @@ export function renderWithProviders(
   return render(ui, { wrapper: Wrapper, ...renderOptions });
 }
 
-// re-export everything
 export * from '@testing-library/react';
 
-// override render method
 export { renderWithProviders as render };

@@ -6,10 +6,10 @@ const ErrorComponent = ({ error }) => {
     },
   } = error;
   return (
-    <div>
+    <section role="alert">
       <h1>Error {status}</h1>
       <p>{msg}</p>
-    </div>
+    </section>
   );
 };
 
