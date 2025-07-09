@@ -5,17 +5,19 @@ import { describe, expect } from 'vitest';
 const { findByText, findByAltText, findByRole } = screen;
 
 describe('Article', () => {
-  test('Article details are rendered correctly from the api call', async () => {
+  test('Article details are rendered correctly', async () => {
     render(<Article />, {
       route: '/articles/123',
       path: '/articles/:article_id',
       withRoutes: true,
     });
 
-    const title = await findByRole('heading', { name: /the notorious msg/i });
+    const title = await findByRole('heading', {
+      name: /Article title for article 123/i,
+    });
     const author = await findByText(/posted by/i);
     const image = await findByAltText('article image');
-    const articleBody = await findByText(/the 'umami' craze/i);
+    const articleBody = await findByText(/article body 123/i);
     const commentCount = await findByText(/comments/i);
     const votingSection = await findByRole('region', { name: /voting/i });
     const commentSection = await findByRole('form', {

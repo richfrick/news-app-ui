@@ -24,9 +24,9 @@ function ArticleByTopic() {
     return <ErrorComponent error={error} />;
   }
   return (
-    <>
+    <section aria-label="filtered topic">
       <h1>{topic}</h1>
-      {sortBy ? (
+      {sortBy || sortOrder ? (
         <h2 className="flex justify-center pb-2 text-[20px]">
           Articles currently filtered{' '}
           {sortBy ? (
@@ -44,12 +44,16 @@ function ArticleByTopic() {
           ) : null}
         </h2>
       ) : null}
-      <section className="flex flex-wrap gap-3 justify-center">
+      <section
+        className="flex flex-wrap gap-3 justify-center"
+        aria-label="list of articles"
+        role="list"
+      >
         {data.map((article) => {
           return <ArticleCard article={article} key={article.article_id} />;
         })}
       </section>
-    </>
+    </section>
   );
 }
 

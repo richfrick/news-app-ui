@@ -7,6 +7,7 @@ export function renderWithProviders(
   {
     loggedInUser,
     route = '/',
+    routes = [],
     path = '/',
     withRoutes = false,
     ...renderOptions
@@ -17,7 +18,13 @@ export function renderWithProviders(
       {withRoutes ? (
         <MemoryRouter initialEntries={[route]}>
           <Routes>
-            <Route path={path} element={children} />
+            {routes.length > 0 ? (
+              routes.map(({ path, element }) => (
+                <Route key={path} path={path} element={element} />
+              ))
+            ) : (
+              <Route path={path} element={children} />
+            )}
           </Routes>
         </MemoryRouter>
       ) : (
@@ -28,8 +35,6 @@ export function renderWithProviders(
   return render(ui, { wrapper: Wrapper, ...renderOptions });
 }
 
-// re-export everything
 export * from '@testing-library/react';
 
-// override render method
 export { renderWithProviders as render };
