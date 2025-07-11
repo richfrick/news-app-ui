@@ -17,6 +17,17 @@ describe('Article List Componenet', () => {
     expect(articleCards.length).toBe(2);
   });
 
-  test.todo('error response from api call displays the error componenet');
+  test('error response from api call displays the error component', async () => {
+    render(<ArticlesList />, {
+      route: '/articles?sort_by=fooBar',
+      path: '/articles',
+      withRoutes: true,
+    });
+
+    const errorMessage = await findByRole('alert');
+
+    expect(errorMessage).toBeVisible();
+  });
+
   test.todo('loading gif displays when api call is delayed');
 });
