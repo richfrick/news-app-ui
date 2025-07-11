@@ -8,7 +8,7 @@ function ArticlesContainer() {
   return (
     <section>
       <h1 className="m-5">All Articles</h1>
-      {sortBy ? (
+      {sortBy || sortOrder ? (
         <h2 className="flex justify-center pb-2 text-[20px]">
           Articles currently filtered{' '}
           {sortBy ? (
@@ -26,7 +26,9 @@ function ArticlesContainer() {
           ) : null}
         </h2>
       ) : null}
-      <ArticlesList sortBy={sortBy} sortOrder={sortOrder} />
+      <section aria-label="list of articles" role="list">
+        <ArticlesList sortBy={sortBy} sortOrder={sortOrder} />
+      </section>
     </section>
   );
 }

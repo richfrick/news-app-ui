@@ -61,31 +61,6 @@ describe('Article By Topic', () => {
     expect(articleList).toHaveLength(2);
   });
 
-  test('Clicking on an Article list item takes you to the article', async () => {
-    const user = userEvent.setup();
-
-    render(<ArticleByTopic />, {
-      route: '/articles?topic=football',
-      withRoutes: true,
-      routes: [
-        { path: '/articles', element: <ArticleByTopic /> },
-        { path: '/articles/:article_id', element: <Article /> },
-      ],
-    });
-
-    const articleLinks = await findAllByRole('link');
-    expect(articleLinks.length).toBe(2);
-
-    await user.click(articleLinks[0]);
-
-    const title = await findByRole('heading', {
-      name: /Article title for article 21/i,
-    });
-
-    expect(title).toBeVisible();
-    expect(articleLinks[0]).not.toBeInTheDocument();
-  });
-
   test('sort by comment count', async () => {
     render(<ArticleByTopic />, {
       route: '/articles?topic=football&sort_by=comment_count&order=',

@@ -3,6 +3,7 @@ import { getAllArticles } from '../api';
 import ArticleCard from './ArticleCard';
 import useApiRequest from '../hooks/useApiRequest';
 import Loading from './LoadingComponenet';
+import ErrorComponent from './ErrorCompnent';
 
 function ArticlesList() {
   const [searchParams] = useSearchParams();
@@ -20,7 +21,7 @@ function ArticlesList() {
     return <Loading />;
   }
   if (error) {
-    return <Error error={error} />;
+    return <ErrorComponent error={error} />;
   }
   return (
     <section className="flex flex-wrap gap-3 justify-center">
