@@ -1,5 +1,5 @@
-import { render, screen } from '../test-utils/testing-library-utils';
-import ArticlesContainer from '../components/ArticlesContainer';
+import { render, screen } from './test-utils/testing-library-utils';
+import ArticlesContainer from '../src/components/ArticlesContainer';
 import { describe, test, expect } from 'vitest';
 
 const { findByRole } = screen;

@@ -1,8 +1,8 @@
-import { render, screen, within } from '../test-utils/testing-library-utils';
+import { render, screen, within } from './test-utils/testing-library-utils';
 import { describe, expect, test } from 'vitest';
 import userEvent from '@testing-library/user-event';
-import ArticlesList from '../components/ArticlesList';
-import Article from '../components/Article';
+import ArticlesList from '../src/components/ArticlesList';
+import Article from '../src/components/Article';
 
 const { findByRole, findAllByRole, getByRole } = screen;
 

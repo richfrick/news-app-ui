@@ -1,5 +1,5 @@
-import { render, screen } from '../test-utils/testing-library-utils';
-import Article from '../components/Article';
+import { render, screen } from './test-utils/testing-library-utils';
+import Article from '../src/components/Article';
 import { describe, expect } from 'vitest';
 
 const { findByText, findByAltText, findByRole } = screen;
