@@ -26,8 +26,8 @@ function NavBar() {
         <button>Article list</button>
       </Link>
       <div className="pr-4">
-        <label>
-          Topics:
+        <fieldset>
+          Topic:
           <Link to={`/articles?topic=football`}>
             <button>Football</button>
           </Link>
@@ -37,14 +37,15 @@ function NavBar() {
           <Link to={`/articles?topic=coding`}>
             <button>Coding</button>
           </Link>
-        </label>
+        </fieldset>
       </div>
       <div className="pr-4 flex">
-        <label>
+        <label htmlFor="sortBy">
           Sort By:
           <select
+            id="sortBy"
             name="sortOptions"
-            value={sortBy}
+            value={'sortBy'}
             defaultValue="none"
             onChange={handleSortChange}
           >
@@ -54,9 +55,10 @@ function NavBar() {
             <option value="votes">Votes</option>
           </select>
         </label>
-        <label>
+        <label htmlFor="sortOrder">
           Sort Order:
           <select
+            id="sortOrder"
             name="sortOrder"
             value={sortOrder}
             defaultValue="none"
@@ -69,7 +71,9 @@ function NavBar() {
         </label>
       </div>
 
-      <button onClick={handleClearFilters}>Clear Filters</button>
+      <button onClick={handleClearFilters} aria-label="clear all filters">
+        Clear Filters
+      </button>
     </section>
   );
 }

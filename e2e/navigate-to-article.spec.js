@@ -6,8 +6,10 @@ test('filter by football articles', async ({ page }) => {
 
   await expect(page).toHaveTitle('Elaborate Snickerdoodle');
 
-  const headerButtons = page.locator('button');
-  await expect(headerButtons.getByText(/football/i)).toBeVisible();
+  const headerButtons = page.locator('fieldset');
+  await expect(
+    headerButtons.getByRole('button', { name: /football/i })
+  ).toBeVisible();
 
   await headerButtons.getByText(/football/i).click();
 
