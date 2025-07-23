@@ -1,5 +1,5 @@
-import { render, screen } from '../test-utils/testing-library-utils';
-import Header from '../components/Header';
+import { render, screen } from './test-utils/testing-library-utils';
+import Header from '../src/components/Header';
 import { describe } from 'vitest';
 
 describe('Header', () => {

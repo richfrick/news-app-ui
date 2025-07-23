@@ -1,8 +1,6 @@
-import { render, screen } from '../test-utils/testing-library-utils';
-import ArticleByTopic from '../components/ArticleByTopic';
+import { render, screen } from './test-utils/testing-library-utils';
+import ArticleByTopic from '../src/components/ArticleByTopic';
 import { describe, expect, test } from 'vitest';
-import userEvent from '@testing-library/user-event';
-import Article from '../components/Article';
 
 const { findByRole, findAllByRole } = screen;
 

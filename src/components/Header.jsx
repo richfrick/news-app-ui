@@ -5,7 +5,7 @@ import logo from '../assets/snickerdoodle-logo.svg';
 function Header() {
   const { currentUser } = useContext(UserContext);
   return (
-    <header className="border-b-4 flex pb-3 border-[#ffa500]">
+    <header className="border-b-4 flex justify-center pb-3 border-[#ffa500]">
       <img src={logo} width={150} height={150} alt="website logo" />
       <div className="border-3 rounded-lg border-[#ffa500]">
         <h1>Welcome to Elaborate-Snickerdoodle</h1>

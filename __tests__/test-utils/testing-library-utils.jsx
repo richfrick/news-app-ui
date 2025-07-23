@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import { TestUserProvider } from '../contexts/User';
+import { TestUserProvider } from '../../src/contexts/User';
 
 export function renderWithProviders(
   ui,

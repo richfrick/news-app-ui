@@ -1,10 +1,10 @@
-import { render, screen } from '../test-utils/testing-library-utils';
-import ArticleCard from '../components/ArticleCard';
+import { render, screen } from './test-utils/testing-library-utils';
+import ArticleCard from '../src/components/ArticleCard';
 import { describe, expect, test } from 'vitest';
 import userEvent from '@testing-library/user-event';
-import ArticlesList from '../components/ArticlesList';
-import Article from '../components/Article';
-import ArticleByTopic from '../components/ArticleByTopic';
+import ArticlesList from '../src/components/ArticlesList';
+import Article from '../src/components/Article';
+import ArticleByTopic from '../src/components/ArticleByTopic';
 
 const { findByRole, findAllByRole } = screen;
 
