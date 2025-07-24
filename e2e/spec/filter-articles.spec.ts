@@ -3,7 +3,7 @@ import { NavBar } from '../page-objects/navBar';
 import { Article } from '../page-objects/article';
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('http://localhost:5173/');
+  await page.goto(process.env.URL!);
 });
 
 test('filter by football articles', async ({ page }) => {

@@ -4,7 +4,7 @@ import { Article } from '../page-objects/article';
 import { randomSentence } from '../utils/test-data';
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('http://localhost:5173/');
+  await page.goto(process.env.URL!);
 });
 
 test('Delete a comment', async ({ page, request }) => {
@@ -13,7 +13,7 @@ test('Delete a comment', async ({ page, request }) => {
   const commentText = randomSentence(5);
 
   const addCommentResponse = await request.post(
-    'https://news-app-ugpw.onrender.com/api/articles/19/comments',
+    `${process.env.DB}/articles/19/comments`,
     {
       data: {
         author: 'tickle122',
