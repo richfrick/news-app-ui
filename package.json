@@ -6,7 +6,8 @@
   "scripts": {
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "dev": "vite",
+    "dev-local": "vite",
+    "dev-docker": "vite --host",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

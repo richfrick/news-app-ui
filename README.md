@@ -41,7 +41,7 @@ In order to use this you will need define environment variables for connecting t
 
 3. Build the docker image
 
-   `docker build <image_name> .`
+   `docker build <image_name> -f Dockerfile.prod .`
 
 4. Start the container
 
@@ -49,12 +49,28 @@ In order to use this you will need define environment variables for connecting t
 
 5. By default vite will run the app on `http://localhost:5173/` if it is free but the teminal will tell you the port it has been opened on.
 
-6. Run unit tests (written using vitest & react-testing-library)
+## 📚 Running in dev-mode with hot reloading
+
+1. Build the docker image
+
+   `docker build -t nc-news-ui:dev -f Dockerfile.dev .`
+
+2. Start the container
+
+   `docker run --rm -d -p 5173:5173 -v ./public:/app/public -v ./src:/app/src nc-news-ui:dev`
+
+3. open `http://localhost:5173/` on your browser
+
+4. you changes in src will be reflected in your browser
+
+## 📚 Running the tests
+
+1. Run unit tests (written using vitest & react-testing-library)
 
    `npm install`
    `npm test`
 
-7. Run e2e tests (written using playwright)
+2. Run e2e tests (written using playwright)
 
    `npm run test:e2e`
 
