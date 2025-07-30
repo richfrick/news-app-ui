@@ -25,6 +25,7 @@ Min Versions
 
 - [node v20 or above](https://nodejs.org/api/https.html) (build on v23.3.0)
 - [vitest v3 or above](https://www.npmjs.com/package/vitest) (tests written using 3.2.4)
+- [Docker9](https://www.docker.com/) (built and tested using v4.43.2)
 
 ## 📚 Getting started
 
@@ -38,18 +39,23 @@ In order to use this you will need define environment variables for connecting t
 
    `news-app-ui`
 
-3. Install dependencies
+3. Build the docker image
+
+   `docker build <image_name> .`
+
+4. Start the container
+
+   `docker run <image_name>`
+
+5. By default vite will run the app on `http://localhost:5173/` if it is free but the teminal will tell you the port it has been opened on.
+
+6. Run unit tests (written using vitest & react-testing-library)
 
    `npm install`
+   `npm test`
 
-4. Run tests the (written using vitest & react-testing-library)
+7. Run e2e tests (written using playwright)
 
-   `npm run test`
-
-5. Start the app by running
-
-   `npm run dev`
-
-6. By default vite will run the app on `http://localhost:5173/` if it is free but the teminal will tell you the port it has been opened on.
+   `npm run test:e2e`
 
 This portfolio project was created as part of a Digital Skills Bootcamp in Software Engineering provided by [Northcoders](https://northcoders.com/)
