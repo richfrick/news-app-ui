@@ -1,26 +1,12 @@
-name: Deploy to Netlify
+name: Deploy Production
+run-name: ${{ github.actor }} is deploying to Production 🚀
 
 on:
   push:
     branches:
-      - main # Change this if your main branch has a different name
+      - main
 
 jobs:
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout repo
-        uses: actions/checkout@v3
-
-      - name: Use Node.js
-        uses: actions/setup-node@v2
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run functional/unit tests
-        run: npm t
   build-and-deploy:
     runs-on: ubuntu-latest
 
@@ -31,10 +17,10 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build project
         run: npm run build

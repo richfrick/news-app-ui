@@ -13,7 +13,7 @@ test('Delete a comment', async ({ page, request }) => {
   const commentText = randomSentence(5);
 
   const addCommentResponse = await request.post(
-    `${process.env.DB}/articles/19/comments`,
+    `${process.env.URL}/articles/19/comments`,
     {
       data: {
         author: 'tickle122',

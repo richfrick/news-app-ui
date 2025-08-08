@@ -1,7 +1,7 @@
 import { http, HttpResponse } from 'msw';
 
 export const handlers = [
-  http.get('https://news-app-ugpw.onrender.com/api/articles', ({ request }) => {
+  http.get('https://news-app-stg.onrender.com/api/articles', ({ request }) => {
     const url = new URL(request.url);
     const topic = url.searchParams.get('topic');
     const sortBy = url.searchParams.get('sort_by');
@@ -88,7 +88,7 @@ export const handlers = [
   }),
 
   http.get(
-    'https://news-app-ugpw.onrender.com/api/articles/:articleId',
+    'https://news-app-stg.onrender.com/api/articles/:articleId',
     ({ params }) => {
       const { articleId } = params;
 
@@ -121,7 +121,7 @@ export const handlers = [
   ),
 
   http.get(
-    'https://news-app-ugpw.onrender.com/api/articles/:articleId/comments',
+    'https://news-app-stg.onrender.com/api/articles/:articleId/comments',
     ({ params }) => {
       const { articleId } = params;
 
