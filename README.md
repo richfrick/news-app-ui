@@ -57,7 +57,7 @@ In order to use this you will need define environment variables for connecting t
 
 2. Start the container
 
-   `docker run --rm -d -p 5173:5173 -v ./public:/app/public -v ./src:/app/src nc-news-ui:dev`
+   `docker run --rm -d -p 5173:5173 -v ./public:/app/public -v ./src:/app/src --env-file .env.local nc-news-ui:dev`
 
 3. open `http://localhost:5173/` on your browser
 
