@@ -25,7 +25,7 @@ jobs:
       - name: Build project
         run: npm run build
         env:
-          API_URL: ${{ secrets.API_URL }}
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
 
       - name: Deploy to Netlify
         run: |
