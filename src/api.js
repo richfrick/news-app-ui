@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const newsAppAPI = axios.create({
-  baseURL: import.meta.env?.VITE_API_URL,
+  baseURL: process.env.API_URL,
 });
 
 export const getAllArticles = async (topic, sortBy, order) => {
