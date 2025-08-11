@@ -4,7 +4,6 @@ run-name: ${{ github.actor }} is deploying to Staging 🚀
 on:
   pull_request:
     branches: [main]
-
 jobs:
   test:
     name: Functional tests
