@@ -38,12 +38,11 @@ jobs:
         run: npm ci
 
       - name: Build Project
-        run: npm run build
+        run: |
+          echo "VITE_API_URL = $VITE_API_URL"
+          npm run build
         env:
           VITE_API_URL: ${{ secrets.VITE_API_URL_STAGING }}
-
-      - name: Check API_URL
-        run: echo $VITE_API_URL
 
       - name: Deploy to Netlify
         run: |
