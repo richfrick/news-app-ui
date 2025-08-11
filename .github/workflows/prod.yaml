@@ -1,14 +1,14 @@
 name: Deploy Production
 run-name: ${{ github.actor }} is deploying to Production 🚀
-
 on:
   push:
     branches:
       - main
-
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      VITE_API_URL: ${{ secrets.VITE_API_URL }}
 
     steps:
       - name: Checkout code
