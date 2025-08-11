@@ -4,6 +4,7 @@ run-name: ${{ github.actor }} is deploying to Staging 🚀
 on:
   pull_request:
     branches: [main]
+    types: [opened, synchronize, reopened]
 jobs:
   test:
     name: Functional tests
@@ -22,6 +23,7 @@ jobs:
         run: npm t
 
   build-deploy:
+    if: github.event_name == 'pull_request' && github.base_ref == 'main'
     runs-on: ubuntu-latest
     needs: test
     env:
