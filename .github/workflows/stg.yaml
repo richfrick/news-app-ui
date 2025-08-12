@@ -40,10 +40,10 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-      - name: Check API URL (debug)
-        run: echo "VITE_API_URL = $VITE_API_URL"
+
       - name: Build Project
         run: npm run build
+
       - name: Deploy to Netlify
         run: |
           npm install -g netlify-cli
