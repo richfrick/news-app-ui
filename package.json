@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "vitest run",
-    "test:e2e": "playwright test",
+    "test:e2e": "playwright test --project=local",
     "dev-local": "vite",
     "dev-docker": "vite --host",
     "build": "vite build",
@@ -30,6 +30,7 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
+    "@types/jest": "^30.0.0",
     "@types/node": "^24.0.15",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",

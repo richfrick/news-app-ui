@@ -1,12 +1,19 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
+import * as dotenv from 'dotenv';
+import * as fs from 'fs';
+import * as path from 'path';
 
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-import dotenv from 'dotenv';
-// import path from 'path';
+function loadEnv(projectName: string) {
+  const envFile = `.env.${projectName}`;
+  const envPath = path.resolve(envFile);
+  if (fs.existsSync(envPath)) {
+    dotenv.config({ path: envPath });
+  } else {
+    console.warn(`Env file not found: ${envPath}`);
+  }
+}
+
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
 dotenv.config();
 /**
@@ -27,7 +34,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://localhost:3000',
+    baseURL: process.env.URL,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
@@ -35,6 +42,24 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
+    {
+      name: 'local',
+      use: {
+        baseURL: (() => {
+          loadEnv('local');
+          return process.env.BASE_URL;
+        })(),
+      },
+    },
+    {
+      name: 'staging',
+      use: {
+        baseURL: (() => {
+          loadEnv('staging');
+          return process.env.BASE_URL;
+        })(),
+      },
+    },
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
