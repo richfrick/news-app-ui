@@ -43,8 +43,9 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'local',
+      name: 'local-chrome',
       use: {
+        ...devices['Desktop Chrome'],
         baseURL: (() => {
           loadEnv('local');
           return process.env.BASE_URL;
@@ -52,10 +53,21 @@ export default defineConfig({
       },
     },
     {
-      name: 'staging',
+      name: 'local-safari',
       use: {
+        ...devices['Desktop Safari'],
         baseURL: (() => {
-          loadEnv('staging');
+          loadEnv('local');
+          return process.env.BASE_URL;
+        })(),
+      },
+    },
+    {
+      name: 'local-firefox',
+      use: {
+        ...devices['Desktop Firefox'],
+        baseURL: (() => {
+          loadEnv('local');
           return process.env.BASE_URL;
         })(),
       },
