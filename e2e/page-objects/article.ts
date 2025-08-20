@@ -8,7 +8,7 @@ export class Article {
   }
 
   async getComments(): Promise<Locator> {
-    return this.page.locator('div[class*="p-3"][class*="rounded-lg"]');
+    return this.page.locator('div.p-3.rounded-lg');
   }
 
   async commentExists(

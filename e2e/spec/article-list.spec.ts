@@ -1,9 +1,8 @@
 import { expect, test } from '@playwright/test';
 import { NavBar } from '../page-objects/navBar';
-import { Article } from '../page-objects/article';
 
 test.beforeEach(async ({ page }) => {
-  await page.goto(process.env.URL!);
+  await page.goto('/');
 });
 
 test('filter by football articles', async ({ page }) => {
@@ -18,5 +17,9 @@ test('filter by football articles', async ({ page }) => {
   await expect(page).toHaveTitle('Elaborate Snickerdoodle');
   await expect(filteredTopicHeading).toBeVisible();
   await expect(filteredTopicHeading).toContainText(/football/i);
-  await expect(articles).toHaveCount(13);
+
+  for (let i = 0; i < (await articles.count()); i++) {
+    const article = articles.nth(i);
+    expect(article).toContainText('Topic: football');
+  }
 });

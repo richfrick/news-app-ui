@@ -6,8 +6,6 @@
     "strict": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "types": ["node", "@playwright/test"]
-  },
-  "include": ["e2e/**/*.ts", "playwright.config.ts"]
+    "resolveJsonModule": true
+  }
 }
