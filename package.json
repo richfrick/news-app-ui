@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "vitest run",
-    "test:e2e": "playwright test --project=local-chrome --project=local-firefox --project=local-safari",
+    "test:e2e": "npx playwright test --project=local-chrome --project=local-firefox --project=local-safari",
     "dev-local": "vite",
     "dev-docker": "vite --host",
     "build": "vite build",
