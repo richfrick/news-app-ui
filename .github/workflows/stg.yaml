@@ -53,3 +53,30 @@ jobs:
             --dir=dist \
             --prod \
             --json
+
+  e2e-tests:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    needs: build-deploy
+    env:
+      ENV: staging
+      BASE_URL: ${{ secrets.BASE_URL_STAGING }}
+      VITE_API_URL: ${{ secrets.VITE_API_URL_STAGING }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm ci --force
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps --force
+      - name: Run Playwright tests
+        run: npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
