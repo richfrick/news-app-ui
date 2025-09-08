@@ -86,3 +86,6 @@ jobs:
           report-path: ./ctrf/ctrfReport.json
           summary: true
           pull-request: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: always()
