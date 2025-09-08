@@ -58,6 +58,8 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     needs: build-deploy
+    permissions:
+      pull-requests: write
     env:
       ENV: staging
       BASE_URL: ${{ secrets.BASE_URL_STAGING }}
@@ -80,3 +82,12 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+      - name: Publish Test Summary Results
+        uses: ctrf-io/github-test-reporter@v1
+        with:
+          report-path: ./ctrf/ctrfReport.json
+          summary: true
+          pull-request-report: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: always()

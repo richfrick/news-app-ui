@@ -50,6 +50,7 @@
     "globals": "^15.15.0",
     "jsdom": "^26.1.0",
     "msw": "^2.10.2",
+    "playwright-ctrf-json-reporter": "^0.0.23",
     "prettier": "^3.6.2",
     "typescript": "^5.9.2",
     "vite": "^6.2.0",
