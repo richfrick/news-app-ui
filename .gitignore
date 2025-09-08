@@ -15,6 +15,7 @@ dist-ssr
 
 # Testing
 playwright-report
+ctrf
 
 # Editor directories and files
 .vscode
