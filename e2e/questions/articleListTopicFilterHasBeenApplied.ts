@@ -1,6 +1,9 @@
 import { expect, Page } from '@playwright/test';
 
-export async function topicFilterHasBeenApplied(page: Page, topic: string) {
+export async function articleListTopicFilterHasBeenApplied(
+  page: Page,
+  topic: string
+) {
   var regex = new RegExp(topic, 'i');
 
   const filteredTopicHeading = page.getByRole('region', {
