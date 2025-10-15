@@ -15,7 +15,6 @@ test.beforeEach(async ({ page }) => {
 
 test('Delete a comment', async ({ page, request }) => {
   const commentText = randomSentence(5);
-
   const {
     article: { article_id, author },
   } = await createArticle(request, 'tickle122');
@@ -25,10 +24,14 @@ test('Delete a comment', async ({ page, request }) => {
     author,
     commentText
   );
-  await page.goto(`articles/${article_id}`);
-  await commentCountOnArticleShouldBe(page, 1);
-  await articleCommentShouldExist(page, comment.body, true);
-  await deleteComment(page, comment);
-  await articleCommentShouldExist(page, comment.body, false);
-  await deleteArticle(request, article_id);
+
+  try {
+    await page.goto(`articles/${article_id}`);
+    await commentCountOnArticleShouldBe(page, 1);
+    await articleCommentShouldExist(page, comment.body, true);
+    await deleteComment(page, comment);
+    await articleCommentShouldExist(page, comment.body, false);
+  } finally {
+    await deleteArticle(request, article_id);
+  }
 });
