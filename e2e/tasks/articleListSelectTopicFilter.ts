@@ -1,6 +1,6 @@
 import { expect, Page } from '@playwright/test';
 
-export async function selectTopic(page: Page, topic: string) {
+export async function articleListSelectTopicFilter(page: Page, topic: string) {
   var regex = new RegExp(topic, 'i');
   var buttonToBeClicked = page
     .locator('fieldset')
