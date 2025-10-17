@@ -1,8 +1,7 @@
-import { APIRequestContext } from '@playwright/test';
-import { Article } from '../types/article';
-import { Comment } from '../types/comment';
+import { APIRequestContext, APIResponse } from '@playwright/test';
+import { Article, Comment } from '../types';
 
-async function responseHandler<T>(response: any): Promise<T> {
+async function responseHandler<T>(response: APIResponse): Promise<T> {
   if (!response.ok()) {
     const text = await response.text();
     throw new Error(`API Error: ${response.status()} - ${text}`);
@@ -53,18 +52,23 @@ export async function deleteArticle(
 
 export async function createArticle(
   api: APIRequestContext,
-  author: string
+  authorOrObject: string | Article
 ): Promise<{ data: { article: Article } }> {
   try {
+    const input =
+      typeof authorOrObject === 'string'
+        ? {
+            author: authorOrObject,
+            title: `test title ${Date.now()}`,
+            body: 'Lorem ipsum dolor sit amet',
+            topic: 'football',
+            article_img_url:
+              'https://images.pexels.com/photos/11035380/pexels-photo-11035380.jpeg?w=700&h=700',
+          }
+        : authorOrObject;
+
     const response = await api.post(`${process.env.VITE_API_URL}/articles`, {
-      data: {
-        author,
-        title: `test title ${Date.now()}`,
-        body: 'Lorem ipsum dolor sit amet',
-        topic: 'football',
-        article_img_url:
-          'https://images.pexels.com/photos/11035380/pexels-photo-11035380.jpeg?w=700&h=700',
-      },
+      data: input,
     });
 
     return responseHandler(response);
