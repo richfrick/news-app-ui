@@ -1,7 +1,7 @@
-import { APIRequestContext } from '@playwright/test';
+import { APIRequestContext, APIResponse } from '@playwright/test';
 import { Article, Comment } from '../types';
 
-async function responseHandler<T>(response: any): Promise<T> {
+async function responseHandler<T>(response: APIResponse): Promise<T> {
   if (!response.ok()) {
     const text = await response.text();
     throw new Error(`API Error: ${response.status()} - ${text}`);
