@@ -5,15 +5,9 @@ export async function articleCommentShouldExist(
   commentBody: string,
   shouldExist: boolean
 ) {
-  const comments = page.locator('div.p-3.rounded-lg');
-  let commentFound = false;
-
-  for (let i = 0; i < (await comments.count()); i++) {
-    const text = await comments.nth(i).locator('p').textContent();
-    if (text?.toLowerCase().includes(commentBody.toLowerCase())) {
-      commentFound = true;
-    }
-  }
+  const commentFound = await page
+    .locator(`//p[contains(.,"${commentBody}")]`)
+    .isVisible();
 
   if (shouldExist) {
     expect(commentFound).toBeTruthy();
