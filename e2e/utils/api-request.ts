@@ -14,7 +14,7 @@ export async function createComment(
   article_id: number,
   author: string,
   text: string
-): Promise<{ data: { comment: Comment } }> {
+): Promise<{ comment: Comment }> {
   try {
     const response = await api.post(
       `${process.env.VITE_API_URL}/articles/${article_id.toString()}/comments`,
@@ -53,7 +53,7 @@ export async function deleteArticle(
 export async function createArticle(
   api: APIRequestContext,
   authorOrObject: string | Article
-): Promise<{ data: { article: Article } }> {
+): Promise<{ article: Article }> {
   try {
     const input =
       typeof authorOrObject === 'string'

@@ -4,8 +4,9 @@ import {
   convertDateStringToTimeInMins,
 } from '../utils/data-converters';
 import { LoadingSpinner, ArticleList } from '../selectors';
+import { SortBy } from '../constants/filtersAndSort';
 
-export async function articleHasBeenSortedBy(page: Page, sortedBy: string) {
+export async function articleHasBeenSortedBy(page: Page, sortedBy: SortBy) {
   const loadingSpinner = new LoadingSpinner(page);
   const articleList = new ArticleList(page);
   let sortOrder;

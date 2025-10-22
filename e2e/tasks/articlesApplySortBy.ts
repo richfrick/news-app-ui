@@ -10,5 +10,5 @@ export async function applySortByOnArticles(page: Page, sortBy: string) {
 
   await filterAndSort.sortByDropdown.selectOption({ value: sortBy });
 
-  await expect(filterAndSort.filteredByText(sortBy)).toBeVisible();
+  await expect(filterAndSort.sortedByText(sortBy)).toBeVisible();
 }

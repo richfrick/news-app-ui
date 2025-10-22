@@ -1,4 +1,5 @@
 import { Locator, Page } from '@playwright/test';
+import { SortBy } from '../constants/filtersAndSort';
 
 export class ArticleList {
   private lookup: Record<string, string> = {
@@ -13,7 +14,7 @@ export class ArticleList {
     return this.page.locator('article[role="listitem"]');
   }
 
-  articleTileContent(sortedBy: keyof typeof this.lookup): Locator {
+  articleTileContent(sortedBy: SortBy): Locator {
     const label = this.lookup[sortedBy];
     return this.page.locator(`//article //h3 [contains(., "${label}")]`);
   }
