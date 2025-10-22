@@ -1,13 +1,14 @@
 import { expect, Page } from '@playwright/test';
+import { FilterAndSort, LoadingSpinner } from '../selectors';
 
 export async function applySortByOnArticles(page: Page, sortBy: string) {
-  //await page.locator('select[id=sortBy]').click();
-  //await page.locator(`#sortBy [value="${sortBy}"]`).click();
+  const loadingSpinner = new LoadingSpinner(page);
+  const filterAndSort = new FilterAndSort(page);
 
-  await page.selectOption('#sortBy', { value: `${sortBy}` });
-  const optionSelected = page.locator(
-    `//section/h2/div[contains(., '${sortBy}')]`
-  );
+  await loadingSpinner.isLoading.waitFor({ state: 'detached' });
+  await filterAndSort.sortByDropdown.waitFor({ state: 'attached' });
 
-  await expect(optionSelected).toBeVisible();
+  await filterAndSort.sortByDropdown.selectOption({ value: sortBy });
+
+  await expect(filterAndSort.sortedByText(sortBy)).toBeVisible();
 }

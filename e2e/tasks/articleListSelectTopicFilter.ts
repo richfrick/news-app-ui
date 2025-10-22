@@ -1,10 +1,11 @@
 import { expect, Page } from '@playwright/test';
+import { Topic } from '../constants/filtersAndSort';
+import { FilterAndSort } from '../selectors';
 
-export async function articleListSelectTopicFilter(page: Page, topic: string) {
-  var regex = new RegExp(topic, 'i');
-  var buttonToBeClicked = page
-    .locator('fieldset')
-    .getByRole('button', { name: regex });
-  await expect(buttonToBeClicked).toBeVisible();
-  await buttonToBeClicked.click();
+export async function articleListSelectTopicFilter(page: Page, topic: Topic) {
+  const filterAndSort = new FilterAndSort(page);
+
+  var topicFilterButton = await filterAndSort.topicFilter(topic);
+  await expect(topicFilterButton).toBeVisible();
+  await topicFilterButton.click();
 }

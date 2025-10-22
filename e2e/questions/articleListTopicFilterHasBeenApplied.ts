@@ -1,18 +1,19 @@
 import { expect, Page } from '@playwright/test';
+import { ArticleList, FilterAndSort } from '../selectors';
+import { Topic } from '../constants/filtersAndSort';
 
 export async function articleListTopicFilterHasBeenApplied(
   page: Page,
-  topic: string
+  topic: Topic
 ) {
-  var regex = new RegExp(topic, 'i');
+  const filterAndSort = new FilterAndSort(page);
+  const articleList = new ArticleList(page);
 
-  const filteredTopicHeading = page.getByRole('region', {
-    name: 'filtered topic',
-  });
-  const articles = filteredTopicHeading.getByRole('listitem');
+  const filteredTopicHeading = filterAndSort.topicFilteredByHeading;
+  const articles = articleList.articleTile;
 
   await expect(filteredTopicHeading).toBeVisible();
-  await expect(filteredTopicHeading).toContainText(regex);
+  await expect(filteredTopicHeading).toHaveText(topic);
 
   for (let i = 0; i < (await articles.count()); i++) {
     const article = articles.nth(i);
