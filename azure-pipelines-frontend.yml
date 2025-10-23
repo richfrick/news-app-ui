@@ -1,0 +1,29 @@
+trigger:
+branches:
+include: [main]
+
+pool:
+vmImage: 'ubuntu-latest'
+
+variables:
+azureServiceConnection: 'AzureServiceConnection'
+staticAppName: 'news-app-ui' # if needed
+
+steps:
+  - checkout: self
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '18.x'
+
+  - script: |
+      npm ci
+      npm run build
+    displayName: 'Build React app'
+
+  - task: AzureStaticWebApp@0
+    inputs:
+    app_location: '/'
+    output_location: 'build'
+    action: 'upload'
+    azure_static_web_apps_api_token: '$(StaticWebAppDeploymentToken)'
+displayName: 'Deploy to Azure Static Web Apps'
