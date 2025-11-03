@@ -77,7 +77,7 @@ stages:
           - script: |
               set -eo pipefail
               npm ci --force
-          - displayName: 'Install Dependencies'
+            displayName: 'Install Dependencies'
           - script: |
               set -eo pipefail
               npx playwright install --with-deps --force
