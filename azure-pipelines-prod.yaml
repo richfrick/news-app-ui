@@ -7,8 +7,10 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  NODE_VERSION: '20'
-  VITE_API_URL: $(VITE_API_URL)
+  - group: news-app-prod
+  - group: netlify-auth
+  - name: NODE_VERSION
+    value: '20'
 
 stages:
   - stage: BuildDeploy
