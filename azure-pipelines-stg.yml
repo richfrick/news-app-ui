@@ -1,0 +1,67 @@
+trigger: none
+pr:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  NODE_VERSION: '20'
+  VITE_API_URL: $(VITE_API_URL_STAGING)
+
+stages:
+  - stage: Test
+    jobs:
+      - job: UnitTests
+        displayName: 'Run Unit Tests'
+        steps:
+          - checkout: self
+          - task: NodeTool@0
+            inputs:
+              versionSpec: '$(NODE_VERSION)'
+          - script: |
+              npm ci
+              npm test
+            displayName: 'Run tests'
+
+  - stage: BuildDeploy
+    dependsOn: Test
+    condition: succeeded()
+    jobs:
+      - job: BuildAndDeploy
+        displayName: 'Build & Deploy to Netlify (Staging)'
+        steps:
+          - checkout: self
+          - task: NodeTool@0
+            inputs:
+              versionSpec: '$(NODE_VERSION)'
+          - script: |
+              npm ci
+              npm run build
+              npm install -g netlify-cli
+              netlify deploy \
+                --auth $(NETLIFY_AUTH_TOKEN) \
+                --site $(NETLIFY_SITE_ID_STAGING) \
+                --dir=dist \
+                --prod \
+                --json
+            displayName: 'Build & Deploy'
+
+  - stage: E2E
+    dependsOn: BuildDeploy
+    condition: succeeded()
+    jobs:
+      - job: PlaywrightTests
+        displayName: 'Run Playwright E2E Tests'
+        steps:
+          - checkout: self
+          - task: NodeTool@0
+            inputs:
+              versionSpec: '$(NODE_VERSION)'
+          - script: |
+              npm ci --force
+              npx playwright install --with-deps --force
+              npm run test:e2e
+            displayName: 'Run Playwright Tests'

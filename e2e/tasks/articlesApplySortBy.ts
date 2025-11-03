@@ -1,7 +1,8 @@
 import { expect, Page } from '@playwright/test';
 import { FilterAndSort, LoadingSpinner } from '../selectors';
+import { SortBy } from '../constants/filtersAndSort';
 
-export async function applySortByOnArticles(page: Page, sortBy: string) {
+export async function applySortByOnArticles(page: Page, sortBy: SortBy) {
   const loadingSpinner = new LoadingSpinner(page);
   const filterAndSort = new FilterAndSort(page);
 

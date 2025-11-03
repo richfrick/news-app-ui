@@ -19,4 +19,12 @@ export class FilterAndSort {
   sortedByText(sortBy: string): Locator {
     return this.page.locator(`//section/h2/div[contains(., '${sortBy}')]`);
   }
+
+  get sortOrderDropdown(): Locator {
+    return this.page.locator(`#sortOrder`);
+  }
+
+  sortOrderText(sortOrder: string): Locator {
+    return this.page.locator(`//h2/div[contains(., "${sortOrder}")]`);
+  }
 }
