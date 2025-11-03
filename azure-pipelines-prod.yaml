@@ -1,0 +1,33 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  NODE_VERSION: '20'
+  VITE_API_URL: $(VITE_API_URL)
+
+stages:
+  - stage: BuildDeploy
+    jobs:
+      - job: BuildAndDeploy
+        displayName: 'Build & Deploy to Netlify (Prod)'
+        steps:
+          - checkout: self
+          - task: NodeTool@0
+            inputs:
+              versionSpec: '$(NODE_VERSION)'
+          - script: |
+              npm ci
+              npm run build
+              npm install -g netlify-cli
+              netlify deploy \
+                --auth $(NETLIFY_AUTH_TOKEN) \
+                --site $(NETLIFY_SITE_ID) \
+                --dir=dist \
+                --prod \
+                --json
+            displayName: 'Build & Deploy'
