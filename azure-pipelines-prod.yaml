@@ -23,6 +23,8 @@ stages:
             inputs:
               versionSpec: '$(NODE_VERSION)'
           - script: |
+              set -eo pipefail
+              export VITE_API_URL=$(VITE_API_URL_STAGING)
               npm ci
               npm run build
               npm install -g netlify-cli
