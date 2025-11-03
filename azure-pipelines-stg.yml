@@ -43,7 +43,6 @@ stages:
               versionSpec: '$(NODE_VERSION)'
           - script: |
               set -eo pipefail
-              export VITE_API_URL=$(VITE_API_URL)
               npm ci
               npm run build
               npm install -g netlify-cli
@@ -65,8 +64,8 @@ stages:
         timeoutInMinutes: 60
         variables:
           ENV: staging
-          BASE_URL: $(BASE_URL)
-          VITE_API_URL: $(VITE_API_URL)
+          BASE_URL: $(BASE_URL_STAGING)
+          VITE_API_URL: $(VITE_API_URL_STAGING)
         steps:
           - checkout: self
 
@@ -85,7 +84,7 @@ stages:
 
           - script: |
               set -eo pipefail
-              echo "Running Playwright tests against $(BASE_URL)"
+              echo "Running Playwright tests against $(BASE_URL_STAGING)"
               npm run test:e2e
             displayName: 'Run Playwright Tests'
 
