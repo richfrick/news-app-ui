@@ -84,18 +84,30 @@ stages:
 
           - script: |
               set -eo pipefail
-              echo "Running Playwright tests against $(BASE_URL_STAGING)"
-              npm run test:e2e
+              echo "Running Playwright E2E tests against $BASE_URL"
+              # The --no-open flag prevents the hanging HTML report server
+              # --reporter=junit,line ensures clean console output + XML results for Azure
+              npx playwright test \
+                --project=local-chrome \
+                --project=local-firefox \
+                --project=local-safari \
+                --reporter=junit,line \
+                --no-open
             displayName: 'Run Playwright Tests'
+            env:
+              BASE_URL: $(BASE_URL)
+              VITE_API_URL: $(VITE_API_URL)
+            timeoutInMinutes: 15
 
           - task: PublishTestResults@2
             displayName: 'Publish E2E Test Results'
             condition: always()
             inputs:
               testResultsFiles: '**/test-results/junitReport.xml'
-              testRunTitle: 'Playwright E2E Tests'
+              testRunTitle: 'Playwright E2E Tests (Staging)'
 
           - task: PublishPipelineArtifact@1
+            displayName: 'Upload Playwright HTML Report'
             condition: always()
             inputs:
               targetPath: 'playwright-report'
