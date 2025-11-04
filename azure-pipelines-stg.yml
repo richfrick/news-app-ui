@@ -36,6 +36,8 @@ stages:
     jobs:
       - job: BuildAndDeploy
         displayName: 'Build & Deploy to Netlify (Staging)'
+        env:
+          VITE_API_URL: $(VITE_API_URL_STAGING)
         steps:
           - checkout: self
           - task: NodeTool@0
@@ -62,7 +64,7 @@ stages:
       - job: RunE2ETests
         displayName: 'E2E Tests on Staging'
         timeoutInMinutes: 60
-        variables:
+        env:
           ENV: staging
           BASE_URL: $(BASE_URL_STAGING)
           VITE_API_URL: $(VITE_API_URL_STAGING)
@@ -94,11 +96,7 @@ stages:
                 --project=local-firefox \
                 --project=local-safari \
                 --reporter=junit,line \
-                --no-open
             displayName: 'Run Playwright Tests'
-            env:
-              BASE_URL: $(BASE_URL)
-              VITE_API_URL: $(VITE_API_URL)
             timeoutInMinutes: 15
 
           - task: PublishTestResults@2
