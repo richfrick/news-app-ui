@@ -83,10 +83,12 @@ stages:
             displayName: 'Install Playwright Browsers'
 
           - script: |
+              npx playwright --version
+            displayName: 'Playwright Version'
+
+          - script: |
               set -eo pipefail
               echo "Running Playwright E2E tests against $BASE_URL"
-              # The --no-open flag prevents the hanging HTML report server
-              # --reporter=junit,line ensures clean console output + XML results for Azure
               npx playwright test \
                 --project=local-chrome \
                 --project=local-firefox \
