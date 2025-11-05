@@ -3,12 +3,16 @@ trigger:
     include:
       - main
 
+pr: none
+
 pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  NODE_VERSION: '20'
-  VITE_API_URL: $(VITE_API_URL)
+  - group: news-app-prod
+  - group: netlify-auth
+  - name: NODE_VERSION
+    value: '20'
 
 stages:
   - stage: BuildDeploy
@@ -21,6 +25,8 @@ stages:
             inputs:
               versionSpec: '$(NODE_VERSION)'
           - script: |
+              set -eo pipefail
+              export VITE_API_URL=$(VITE_API_URL_PROD)
               npm ci
               npm run build
               npm install -g netlify-cli
@@ -31,3 +37,5 @@ stages:
                 --prod \
                 --json
             displayName: 'Build & Deploy'
+            env:
+              VITE_API_URL: $(VITE_API_URL_PROD)

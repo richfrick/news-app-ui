@@ -1,27 +1,31 @@
-trigger: none
 pr:
   branches:
     include:
       - main
 
+trigger: none
+
 pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  NODE_VERSION: '20'
-  VITE_API_URL: $(VITE_API_URL_STAGING)
+  - group: news-app-stg
+  - group: netlify-auth
+  - name: NODE_VERSION
+    value: '20'
 
 stages:
   - stage: Test
     jobs:
       - job: UnitTests
-        displayName: 'Run Unit Tests'
+        displayName: 'Run Unit & Functional Tests'
         steps:
           - checkout: self
           - task: NodeTool@0
             inputs:
               versionSpec: '$(NODE_VERSION)'
           - script: |
+              set -eo pipefail
               npm ci
               npm test
             displayName: 'Run tests'
@@ -38,30 +42,59 @@ stages:
             inputs:
               versionSpec: '$(NODE_VERSION)'
           - script: |
+              set -eo pipefail
               npm ci
               npm run build
               npm install -g netlify-cli
               netlify deploy \
                 --auth $(NETLIFY_AUTH_TOKEN) \
-                --site $(NETLIFY_SITE_ID_STAGING) \
+                --site $(NETLIFY_SITE_ID) \
                 --dir=dist \
                 --prod \
                 --json
             displayName: 'Build & Deploy'
+            env:
+              VITE_API_URL: $(VITE_API_URL_STAGING)
 
   - stage: E2E
+    displayName: 'Run Playwright E2E Tests'
     dependsOn: BuildDeploy
     condition: succeeded()
     jobs:
-      - job: PlaywrightTests
-        displayName: 'Run Playwright E2E Tests'
+      - job: RunE2ETests
+        displayName: 'E2E Tests on Staging'
+        timeoutInMinutes: 60
         steps:
           - checkout: self
+
           - task: NodeTool@0
             inputs:
               versionSpec: '$(NODE_VERSION)'
+
           - script: |
+              set -eo pipefail
               npm ci --force
+            displayName: 'Install Dependencies'
+          - script: |
+              set -eo pipefail
               npx playwright install --with-deps --force
-              npm run test:e2e
+            displayName: 'Install Playwright Browsers'
+
+          - script: |
+              npx playwright --version
+            displayName: 'Playwright Version'
+
+          - script: |
+              set -eo pipefail
+              echo "Running Playwright E2E tests against $BASE_URL"
+              npx playwright test \
+                --project=local-chrome \
+                --project=local-firefox \
+                --project=local-safari \
+                --reporter=junit,line \
             displayName: 'Run Playwright Tests'
+            timeoutInMinutes: 15
+            env:
+              ENV: staging
+              BASE_URL: $(BASE_URL_STAGING)
+              VITE_API_URL: $(VITE_API_URL_STAGING)
