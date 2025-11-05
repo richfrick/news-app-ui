@@ -81,8 +81,9 @@ stages:
             displayName: 'Install Playwright Browsers'
 
           - script: |
-              npx playwright --version
-            displayName: 'Playwright Version'
+              mkdir -p test-results
+              mkdir -p playwright-report
+            displayName: 'Prepare result output directories'
 
           - script: |
               set -eo pipefail
@@ -91,10 +92,24 @@ stages:
                 --project=local-chrome \
                 --project=local-firefox \
                 --project=local-safari \
-                --reporter=junit,line \
+                --reporter=junit,html \
             displayName: 'Run Playwright Tests'
             timeoutInMinutes: 15
             env:
               ENV: staging
               BASE_URL: $(BASE_URL_STAGING)
               VITE_API_URL: $(VITE_API_URL_STAGING)
+
+          - task: PublishTestResults@2
+            displayName: 'Publish E2E Test Results'
+            condition: always()
+            inputs:
+              testResultsFiles: 'test-results/junit-report.xml'
+              testRunTitle: 'Playwright E2E Tests (Staging)'
+
+          - task: PublishPipelineArtifact@1
+            displayName: 'Upload Playwright HTML Report'
+            condition: always()
+            inputs:
+              targetPath: 'playwright-report'
+              artifact: 'Playwright HTML Report'
