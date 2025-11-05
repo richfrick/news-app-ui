@@ -93,13 +93,13 @@ stages:
                 --project=local-firefox \
                 --project=local-safari \
                 --reporter=junit,html \
+                --no-open
             displayName: 'Run Playwright Tests'
             timeoutInMinutes: 15
             env:
               ENV: staging
               BASE_URL: $(BASE_URL_STAGING)
               VITE_API_URL: $(VITE_API_URL_STAGING)
-              PWTEST_HTML_REPORT_OPEN: never
 
           - task: PublishTestResults@2
             displayName: 'Publish E2E Test Results'
