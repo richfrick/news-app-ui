@@ -16,8 +16,6 @@ variables:
 
 stages:
   - stage: BuildDeploy
-    env:
-      VITE_API_URL: $(VITE_API_URL_PROD)
     jobs:
       - job: BuildAndDeploy
         displayName: 'Build & Deploy to Netlify (Prod)'
@@ -39,3 +37,5 @@ stages:
                 --prod \
                 --json
             displayName: 'Build & Deploy'
+            env:
+              VITE_API_URL: $(VITE_API_URL_PROD)
