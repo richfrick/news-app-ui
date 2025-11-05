@@ -98,17 +98,3 @@ stages:
               ENV: staging
               BASE_URL: $(BASE_URL_STAGING)
               VITE_API_URL: $(VITE_API_URL_STAGING)
-
-          - task: PublishTestResults@2
-            displayName: 'Publish E2E Test Results'
-            condition: always()
-            inputs:
-              testResultsFiles: '**/test-results/junitReport.xml'
-              testRunTitle: 'Playwright E2E Tests (Staging)'
-
-          - task: PublishPipelineArtifact@1
-            displayName: 'Upload Playwright HTML Report'
-            condition: always()
-            inputs:
-              targetPath: 'playwright-report'
-              artifact: 'Playwright HTML Report'
