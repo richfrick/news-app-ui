@@ -92,8 +92,6 @@ stages:
                 --project=local-chrome \
                 --project=local-firefox \
                 --project=local-safari \
-                --reporter=junit,html \
-                --no-open
             displayName: 'Run Playwright Tests'
             timeoutInMinutes: 15
             env:
