@@ -6,8 +6,7 @@
   "scripts": {
     "test": "vitest run",
     "test:e2e": "npx playwright test --project=local-chrome --project=local-firefox --project=local-safari",
-    "dev-local": "vite",
-    "dev-docker": "vite --host",
+    "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
