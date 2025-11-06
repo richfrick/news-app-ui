@@ -1,77 +1,79 @@
 # Elaborate Snickerdoodle
 
-Home to the most takled about articles on the web
+#### Staging
+
+[![Staging Build](https://dev.azure.com/richardfrickleton/azure-news-app/_apis/build/status%2Frichfrick.news-app-ui-stg?branchName=refs%2Fpull%2F42%2Fmerge)](https://dev.azure.com/richardfrickleton/azure-news-app/_build/latest?definitionId=8&branchName=refs%2Fpull%2F42%2Fmerge)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1b518e00-07e4-4d86-812d-6349742a5337/deploy-status?branch=main)](https://app.netlify.com/projects/elaborate-snickerdoodle-staging/deploys)
+
+#### Production
+
+[![Produdtion Build](https://dev.azure.com/richardfrickleton/azure-news-app/_apis/build/status%2Frichfrick.news-app-ui-prod?branchName=main)](https://dev.azure.com/richardfrickleton/azure-news-app/_build/latest?definitionId=9&branchName=main)
+[![Prodduction Deployemnt](https://api.netlify.com/api/v1/badges/c783e5b6-54ef-48ec-9417-162b84c70e34/deploy-status?branch=main)](https://app.netlify.com/projects/elaborate-snickerdoodle-8745b3/deploys)
 
 ## Table of contents
 
 - [About](#-about)
 - [Hosted version](#-hosted-version)
-- [Pre-requsites](#-pre-requsites)
-- [Getting started](#-getting-started)
+- [Run app locally](#-local-version)
+  - [Pre-requsites](#-pre-requsites)
+  - [Setup](#-setup)
+- [Testing](#-testing)
+  - [Running The Tests](#-running-the-tests)
 
-## 🚀 About
+## About
 
-A small web app where you can view a list of articles from the world of Football, Cooking and Coding. Find an article that interests you and view it to leave a comment or up/down vote it.
+Elaborate-Snickerdoodle is a small blogging app where you can view articles from the world of Football, Cooking and Coding. Find an article that interests you, view it, then be sure to leave a comment or up/down vote it.
 
 ## 📝 Hosted version
 
-Currently the [backend service](https://github.com/richfrick/news-app) this is hosted on a free version of render which tears down after 15 mins on inactivity, so hitting this for the first time could take up to 50s to respond as the service spins back up.
+Currently the [backend service](https://github.com/richfrick/news-app) for this is hosted on a free version of render which tears down after 15 mins of inactivity, so hitting this for the first time could take up to 50s to respond as the service spins back up.
 
 https://elaborate-snickerdoodle-8745b3.netlify.app/
 
-## 📚 Pre-requsites
+## 📝 Local version
+
+### 📚 Pre-requsites
 
 Min Versions
 
 - [node v20 or above](https://nodejs.org/api/https.html) (build on v23.3.0)
 - [vitest v3 or above](https://www.npmjs.com/package/vitest) (tests written using 3.2.4)
-- [Docker9](https://www.docker.com/) (built and tested using v4.43.2)
+- [news-app service will need to be running locally](https://github.com/richfrick/news-app)
 
-## 📚 Getting started
+### 📚 Setup
 
-In order to use this you will need define environment variables for connecting to the test and development databases we'll cover in the steps below. The rest of the setup will make use of pre-defined scripts.
+In order run this locally you will need an .env file we'll cover this in the steps below. The rest of the setup will make use of pre-defined scripts.
 
 1. Clone the repo
 
    `git clone https://github.com/richfrick/news-app-ui.git`
 
-2. in you chosen terminal cd into the root of
+2. in you chosen terminal cd into the root of news-app-ui and run
 
-   `news-app-ui`
+   `npm ci`
 
-3. Build the docker image
+3. Create a .env.local file and add
 
-   `docker build <image_name> -f Dockerfile.prod .`
+   `BASE_URL=http://localhost:5173/`
 
-4. Start the container
+   `VITE_API_URL=http://localhost:9090/api`
 
-   `docker run <image_name>`
+The local UI runs on port 5173 and this is used to run the e2e tests and the backend service runs locally on port 9090 and this will allow the UI to work with real data.
+
+4. Start the UI
+
+   `npm run dev`
+
+The UI starts with hot reloading enabled to any changes you make will be reflected on save.
 
 5. By default vite will run the app on `http://localhost:5173/` if it is free but the teminal will tell you the port it has been opened on.
 
-## 📚 Running in dev-mode with hot reloading
+## 📚 Testing
 
-1. Build the docker image
+The app is covered by functional/unit tests that perform componenet level tests written using react-testing-library as well as a set of E2E tests that use playwright.
 
-   `docker build -t nc-news-ui:dev -f Dockerfile.dev .`
+### 📚 Tests
 
-2. Start the container
+[Functional/Unit tests](./__tests__/README.md)
 
-   `docker run --rm -d -p 5173:5173 -v ./public:/app/public -v ./src:/app/src --env-file .env.local nc-news-ui:dev`
-
-3. open `http://localhost:5173/` on your browser
-
-4. you changes in src will be reflected in your browser
-
-## 📚 Running the tests
-
-1. Run unit tests (written using vitest & react-testing-library)
-
-   `npm install`
-   `npm test`
-
-2. Run e2e tests (written using playwright)
-
-   `npm run test:e2e`
-
-This portfolio project was created as part of a Digital Skills Bootcamp in Software Engineering provided by [Northcoders](https://northcoders.com/)
+[E2E tests (requires backend service to be running)](./e2e/README)
