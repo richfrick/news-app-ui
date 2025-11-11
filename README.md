@@ -76,4 +76,4 @@ The app is covered by functional/unit tests that perform componenet level tests 
 
 [Functional/Unit tests](./__tests__/README.md)
 
-[E2E tests (requires backend service to be running)](./e2e/README)
+[E2E tests (requires backend service to be running)](./e2e/README.md)
